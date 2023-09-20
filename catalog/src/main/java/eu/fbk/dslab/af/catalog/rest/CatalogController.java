@@ -30,9 +30,9 @@ public class CatalogController {
         return service.findProducts(category, page);
     }
 
-    @PostMapping("/products")
-    public @ResponseBody Product create(@RequestBody Product product) {
-        return service.create(product);
+    @PostMapping("/addProduct")
+    public Product addProduct(@RequestBody Product product) {
+        return service.saveProduct(product);
     }
 
     @PutMapping("/products/{id}/availability/{amount}")

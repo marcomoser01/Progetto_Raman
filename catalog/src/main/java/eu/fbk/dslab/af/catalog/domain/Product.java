@@ -2,26 +2,29 @@ package eu.fbk.dslab.af.catalog.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import jakarta.persistence.GeneratedValue;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "Product")
 public class Product {
     @Id
-    private String id;
-
+    @GeneratedValue
+    private Integer id;
     private String title;
-
     private String category;
-
     private String description;
-
     private Double price;
-
     private Integer quantity;
     
-    public String getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getTitle() {
@@ -55,5 +58,4 @@ public class Product {
         this.quantity = quantity;
     }
 
-    
 }

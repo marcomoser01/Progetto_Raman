@@ -8,11 +8,25 @@ import org.springframework.stereotype.Service;
 import eu.fbk.dslab.af.catalog.domain.Product;
 import eu.fbk.dslab.af.catalog.repository.ProductRepository;
 
+import java.util.List;
+
 @Service
 public class ProductService {
     
     @Autowired
     private ProductRepository repo;
+
+    public Product saveProduct(Product product) {
+        return repo.save(product);
+    }
+
+    public List<Product> saveProducts(List<Product> products) {
+        return repo.saveAll(products);
+    }
+
+    public List<Product> getProducts() {
+        return repo.findAll();
+    }
 
     public Page<Product> getProducts(Pageable page) {
         return repo.findAll(page);
@@ -26,22 +40,14 @@ public class ProductService {
         return repo.findByCategory(category,page);
     }
 
-    public Product create(Product product) {
-        //product.setId(null);
-        return save(product);
-    }
-
     public Product changeQuantity(String id, int amount) {
 
         Product p = getProduct(id);
         if (p != null) {
             p.setQuantity(p.getQuantity() - amount);
-            p = save(p);
+            p = saveProduct(p);
         }
         return p;
     }
 
-    public Product save(Product prod) {
-        return repo.save(prod);
-    }
 }
