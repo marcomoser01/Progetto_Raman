@@ -1,6 +1,5 @@
 package eu.fbk.dslab.af.catalog.domain;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -12,7 +11,6 @@ import jakarta.persistence.GeneratedValue;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-// @EnableAutoConfiguration
 @Table(name = "Product")
 public class Product {
     @Id

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import eu.fbk.dslab.af.catalog.domain.Product;
+import eu.fbk.dslab.af.catalog.domain.Rate;
 import eu.fbk.dslab.af.catalog.repository.ProductRepository;
 
 import java.util.List;
@@ -50,4 +51,6 @@ public class ProductService {
         return p;
     }
 
+    
+    
 }
