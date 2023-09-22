@@ -1,6 +1,5 @@
 package com.fbk.purchase.service;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -10,8 +9,7 @@ import com.fbk.purchase.domain.Product;
 @Service
 public class ProductService {
 
-	@Value("${product.endpoint}")
-	private String endpoint;
+	private String endpoint = "http://localhost:8080";
 	
 	private RestTemplate restTemplate = new RestTemplate();
 	

@@ -1,6 +1,5 @@
 package com.fbk.catalog.domain;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

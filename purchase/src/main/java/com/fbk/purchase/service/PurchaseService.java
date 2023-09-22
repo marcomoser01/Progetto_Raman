@@ -5,10 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.fbk.purchase.data.PurchaseRepository;
 import com.fbk.purchase.domain.Product;
 import com.fbk.purchase.domain.Purchase;
 import com.fbk.purchase.domain.PurchaseRequest;
+import com.fbk.purchase.repository.PurchaseRepository;
 
 @Service
 public class PurchaseService {
