@@ -1,10 +1,10 @@
-package com.fbk.users;
+package com.fbk.rating;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UsersApplicationTests {
+class RatingApplicationTests {
 
 	@Test
 	void contextLoads() {

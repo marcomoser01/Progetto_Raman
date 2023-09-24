@@ -23,7 +23,7 @@ public class UserController {
         return service.getAllUsers(page);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/user/{id}")
     public @ResponseBody User getUser(@PathVariable String id) {
         return service.getUser(id);
     }

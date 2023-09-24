@@ -1,13 +1,13 @@
-package com.fbk.users;
+package com.fbk.rating;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UsersApplication {
+public class RatingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UsersApplication.class, args);
+		SpringApplication.run(RatingApplication.class, args);
 	}
 
 }
