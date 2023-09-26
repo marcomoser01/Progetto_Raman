@@ -1,9 +1,14 @@
 package eu.fbk.dslab.af.catalog.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -18,8 +23,11 @@ public class User {
     @GeneratedValue
     private Integer id;
     private String Name;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Rate> ratings = new ArrayList<>();
     
     
+
     public Integer getId() {
         return id;
     }

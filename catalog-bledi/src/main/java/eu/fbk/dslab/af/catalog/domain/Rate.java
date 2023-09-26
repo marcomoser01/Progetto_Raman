@@ -3,6 +3,9 @@ package eu.fbk.dslab.af.catalog.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -19,7 +22,14 @@ public class Rate {
     private Integer id;
     private Integer Vote;
     private String Message;
-    private Integer foreignkey;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    public User user;
+     
+
     
     public Integer getId() {
         return id;
@@ -40,22 +50,7 @@ public class Rate {
         this.Message = Message;
     }
 
-    @OneToOne(mappedBy = "Product", fetch = FetchType.LAZY, orphanRemoval = false)
-    public Integer getforeignkeyUser() {
-        return foreignkey;
-    }
-    public void setforeignkeyUser(Integer foreignkey) {
-        this.foreignkey = foreignkey;
-    }
-
-    @OneToOne(mappedBy = "User", fetch = FetchType.LAZY, orphanRemoval = false)
-    public Integer getforeignkeyProd() {
-        return foreignkey;
-    }
-    public void setforeignkeyProd(Integer foreignkey) {
-        this.foreignkey = foreignkey;
-    }
-   
+    
 
 }
 

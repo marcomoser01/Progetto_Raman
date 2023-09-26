@@ -1,8 +1,15 @@
 package eu.fbk.dslab.af.catalog.domain;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -21,6 +28,9 @@ public class Product {
     private String description;
     private Double price;
     private Integer quantity;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Rate> ratings = new ArrayList<>();
+    
     
     public Integer getId() {
         return id;
