@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ShopPurchaseApplication<purchase>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.fbk.purchase.ShopPurchaseApplication",
+            "projectName": "purchase",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
