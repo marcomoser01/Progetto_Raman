@@ -1,5 +1,5 @@
 
-
+ker run -d -p 9411:9411 openzipkin/zipkin
 {
   "id": 22,
   "title": "prova",
