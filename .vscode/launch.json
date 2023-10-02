@@ -2,21 +2,33 @@
     "configurations": [
         {
             "type": "java",
-            "name": "ShopPurchaseApplication",
-            "request": "launch",
-            "mainClass": "com.fbk.purchase.ShopPurchaseApplication",
-            "projectName": ""
-        },
-        {
-            "type": "java",
             "name": "Spring Boot-CatalogApplication<catalog>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "mainClass": "com.fbk.catalog.CatalogApplication",
             "projectName": "catalog",
             "args": "",
-            "envFile": "${workspaceFolder}/.env",
-            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=35625 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=catalog"
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ShopPurchaseApplication<purchase>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.fbk.purchase.ShopPurchaseApplication",
+            "projectName": "purchase",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-RatingApplication<rating>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.fbk.rating.RatingApplication",
+            "projectName": "rating",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         },
         {
             "type": "java",
@@ -30,11 +42,11 @@
         },
         {
             "type": "java",
-            "name": "Spring Boot-GatewayApplication<gateway>",
+            "name": "Spring Boot-UsersApplication<users>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "com.fbk.gateway.GatewayApplication",
-            "projectName": "gateway",
+            "mainClass": "com.fbk.users.UsersApplication",
+            "projectName": "users",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
