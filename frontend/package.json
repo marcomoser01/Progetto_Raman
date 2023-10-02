@@ -6,10 +6,14 @@
   "scripts": {
     "dev": "vite",
     "tail": "pnpm exec tailwindcss -i ./src/globals.css -o ./public/output.css --watch",
+    "tailBuild": "pnpm exec tailwindcss -i ./src/globals.css -o /dist/output.css",
+    "minifyCSS": "postcss --use cssnano --autoprefixer.browsers \"> 5%\" -o ./public/output.css ./public/output.css",
+    "postcss": "postcss",
     "tsc": "tsc --noEmit --watch",
-    "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "build": "tsc && pnpm tailBuild && pnpm minifyCSS && vite build",
+    "preview": "vite preview",
+    "both": "pnpm build && pnpm preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.1",
@@ -21,6 +25,8 @@
     "@radix-ui/react-toast": "^1.1.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "cssnano": "^6.0.1",
+    "postcss-cli-simple": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
