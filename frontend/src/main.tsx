@@ -1,15 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './globals.css'
-import App from './App'
+
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+
+import AddProduct from './pages/AddProduct'
+import AddRating from './pages/AddRating'
 import Product from './pages/Product'
 import ProductList from './pages/ProductList'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <App />,
+		element: <ProductList />,
 	},
 	{
 		path: '/product',
@@ -21,11 +24,11 @@ const router = createBrowserRouter([
 	},
 	{
 		path: '/addProduct',
-		element: <ProductList />,
+		element: <AddProduct />,
 	},
 	{
 		path: '/addRating',
-		element: <ProductList />,
+		element: <AddRating />,
 	},
 ])
 

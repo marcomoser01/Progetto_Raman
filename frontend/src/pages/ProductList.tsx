@@ -1,18 +1,29 @@
-import Typography from '@/components/Typography'
 import { Button } from '@/components/ui/button'
+import Typography from '@/components/Typography'
 
 export default function ProductList() {
+	function goToAddProduct() {
+		const productId: number = 1234 //TODO get this dinamically. this should NOT exist in the DB.
+
+		localStorage.setItem('productId', productId.toString())
+		// go to page /addProduct
+		location.assign('/addProduct')
+	}
+
 	return (
-		<main className="max-w-5xl mx-auto my-4">
+		<main className="max-w-2xl mx-auto my-4">
 			<Typography variant="h1">Product List</Typography>
 			<br />
-			<Button>Add Product</Button>
+			<Button onClick={goToAddProduct}>Add Product</Button>
 			{/* table */}
 			<div className="my-6 w-full overflow-y-auto">
 				<table className="w-full">
 					{/* HEADER */}
 					<thead>
 						<tr className="m-0 border-t p-0 even:bg-muted">
+							<th className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
+								Product ID
+							</th>
 							<th className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
 								Product
 							</th>
@@ -29,6 +40,9 @@ export default function ProductList() {
 					<tbody>
 						<tr className="m-0 border-t p-0 even:bg-muted" tabIndex={0}>
 							<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+								1
+							</td>
+							<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
 								Prodotto 1
 							</td>
 							<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
@@ -41,6 +55,9 @@ export default function ProductList() {
 
 						<tr className="m-0 border-t p-0 even:bg-muted" tabIndex={0}>
 							<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+								2
+							</td>
+							<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
 								Prodotto 2
 							</td>
 							<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
@@ -52,6 +69,9 @@ export default function ProductList() {
 						</tr>
 
 						<tr className="m-0 border-t p-0 even:bg-muted" tabIndex={0}>
+							<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+								3
+							</td>
 							<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
 								Prodotto 3
 							</td>

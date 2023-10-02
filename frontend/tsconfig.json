@@ -7,9 +7,9 @@
 		"skipLibCheck": true,
 
 		/* SHADCN UI */
-		"baseUrl": "./src",
+		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./*"]
+			"@/*": ["./src/*"]
 		},
 
 		/* Bundler mode */

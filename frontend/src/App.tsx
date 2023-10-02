@@ -1,17 +1,16 @@
 import { Button } from '@/components/ui/button'
-import MyNav from '@/components/MyNav'
+import { Link } from 'react-router-dom'
+import Typography from '@/components/Typography'
 
 function App() {
 	return (
-		<>
-			<header className="p-10 flex justify-center bg-slate-600">
-				<MyNav />
-			</header>
-			<main>
-				<Button>testing stuff</Button>
-			</main>
-			<footer></footer>
-		</>
+		<main className="w-fit mx-auto px-2 py-4">
+			<Typography variant="h1">Catalog Project</Typography>
+			<br />
+			<Button asChild>
+				<Link to="/list">Go to Product List</Link>
+			</Button>
+		</main>
 	)
 }
 

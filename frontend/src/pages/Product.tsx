@@ -1,10 +1,10 @@
-import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
 import Typography from '@/components/Typography'
 
 export default function Product() {
 	return (
-		<main className="max-w-5xl mx-auto my-4">
+		<main className="max-w-3xl mx-auto my-4">
 			{/* insert product name */}
 			<Typography variant="h1">
 				Product Name: <span className="bg-lime-400 px-2 rounded">XXXXX</span>
