@@ -1,14 +1,10 @@
 import {
 	NavigationMenu,
-	NavigationMenuContent,
-	NavigationMenuIndicator,
 	NavigationMenuItem,
 	NavigationMenuLink,
 	NavigationMenuList,
-	NavigationMenuTrigger,
-	NavigationMenuViewport,
 	navigationMenuTriggerStyle,
-} from '@/src/components/ui/navigation-menu'
+} from '@/components/ui/navigation-menu'
 
 function MyNav() {
 	return (
@@ -35,7 +31,7 @@ function MyNav() {
 
 				<NavigationMenuItem>
 					<NavigationMenuLink href="#" className={navigationMenuTriggerStyle()}>
-						Prodotti
+						to test
 					</NavigationMenuLink>
 				</NavigationMenuItem>
 			</NavigationMenuList>

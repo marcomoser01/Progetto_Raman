@@ -1,5 +1,5 @@
-import { Button } from '@/src/components/ui/button'
-import MyNav from '@/src/components/MyNav'
+import { Button } from '@/components/ui/button'
+import MyNav from '@/components/MyNav'
 
 function App() {
 	return (
