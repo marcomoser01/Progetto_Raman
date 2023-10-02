@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.core.env.Environment;
 
 import com.fbk.catalog.domain.Product;
 import com.fbk.catalog.service.ProductService;
@@ -15,9 +14,6 @@ public class CatalogController {
     
     @Autowired
     private ProductService service;
-    
-    @Autowired
-    private Environment environment;
 
 
     @GetMapping("/products")
