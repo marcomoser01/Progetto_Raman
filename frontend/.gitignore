@@ -25,3 +25,5 @@ dist-ssr
 
 # Project specific
 /public/output.css
+
+# remember to git rm --cached <filename> to the file you want to untrack

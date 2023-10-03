@@ -8,17 +8,15 @@ import Rating from '@/components/Rating'
 import { Separator } from '@/components/ui/separator'
 import Typography from '@/components/Typography'
 
-export default function Product() {
+interface Props {
+	productId: number
+}
+
+export default function Product({ productId }: Props) {
 	const [ratings, setRatings] = useState<object[] | []>()
 
 	async function fetchRatings() {
-		const response = await fetch(URL_GET_RATINGS, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			// body: JSON.stringify(data)
-		})
+		const response = await fetch(URL_BASE + `/ratings/${productId}`)
 		if (!response.ok) {
 			return []
 		}
@@ -32,7 +30,7 @@ export default function Product() {
 		if (!Array.isArray(retrievedRatings)) {
 			return []
 		}
-		console.log('retrievedRatings:\n', retrievedRatings)
+		console.log('retrievedFetchThing:\n', retrievedRatings)
 
 		return retrievedRatings || []
 	}
@@ -48,7 +46,8 @@ export default function Product() {
 		<main className="max-w-3xl mx-auto my-4">
 			{/* insert product name */}
 			<Typography variant="h1">
-				Product Name: <span className="bg-gray-300 px-2 rounded">XXXXX</span>
+				Product Name: <span className="bg-gray-300 px-2 rounded">XXXXX</span>{' '}
+				{productId}
 			</Typography>
 			<Typography variant="p">
 				Category: <span className="bg-gray-300 px-2 rounded">XXXXX</span>
