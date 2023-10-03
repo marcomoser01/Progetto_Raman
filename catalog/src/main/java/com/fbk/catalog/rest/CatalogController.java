@@ -1,5 +1,7 @@
 package com.fbk.catalog.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,8 +19,8 @@ public class CatalogController {
 
 
     @GetMapping("/products")
-    public @ResponseBody Page<Product> getProducts(Pageable page) {
-        return service.getProducts(page);
+    public @ResponseBody List<Product> getProducts() {
+        return service.getProducts();
     }
 
     @GetMapping("/products/{id}")

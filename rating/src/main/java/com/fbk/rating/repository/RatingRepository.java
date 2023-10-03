@@ -10,5 +10,6 @@ import com.fbk.rating.domain.Rating;
 
 public interface RatingRepository extends JpaRepository<Rating, String> {
 
-	Page<Rating> findByUserId(String userId, Pageable pageRequest);
+	Page<Rating> findByUserId(Integer userId, Pageable pageRequest);
+	Page<Rating> findByProductId(Integer productId, Pageable pageRequest);
 }

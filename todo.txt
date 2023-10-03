@@ -1,0 +1,8 @@
+fare le api
+dockerizzare bene
+sistemare le fk in rating
+fare readme + swagger
+sistemare i pom
+controllare tutto
+configurazioni su git da mascherare
+gestire meglio la lunghezza del commento
