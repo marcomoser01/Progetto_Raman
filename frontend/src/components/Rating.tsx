@@ -1,31 +1,30 @@
-import Typography from './Typography'
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
-interface Props {
-	userId: number
-	productId: number
-	vote: number
-	description: string
-}
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from '@/components/ui/card'
 
-export default function Rating({
-	userId = 0,
-	productId = 0,
-	vote = 0,
-	description = '',
-}: Props) {
+import { RatingType } from '@/lib/types'
+import Typography from '@/components/Typography'
+
+export default function Rating(rating: RatingType) {
+	//@ts-ignore
+	rating = rating.rating //don't ask
+
 	return (
-		<div className="mb-8">
-			<Typography variant="p">
-				Vote: <span className="bg-gray-300 px-2 rounded">{vote}</span>
-			</Typography>
-			<Typography variant="p">
-				Product Id:{' '}
-				<span className="bg-gray-300 px-2 rounded">{productId}</span>
-			</Typography>
-			<Typography variant="p">
-				User <span className="bg-gray-300 px-2 rounded">{userId}</span> wrote:{' '}
-				<span className="bg-gray-300 px-2 rounded">{description}</span>
-			</Typography>
-		</div>
+		<Card className="mb-4">
+			<CardHeader>
+				<CardTitle>{'<Nome Utente>'}</CardTitle>
+				<CardDescription>{rating.vote}/5</CardDescription>
+			</CardHeader>
+			<CardContent>
+				<p>{rating.message}</p>
+			</CardContent>
+		</Card>
 	)
 }

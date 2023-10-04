@@ -11,7 +11,6 @@ all the package.json scripts can also be run with `npm run x`
 3. `pnpm i` or `npm i` to install necessary packages
 4. run these processes in parallel
    - `pnpm tail` to watch changes in tailwindCSS stuff
-   - `pnpm tsc` to perform type checking, live
    - `pnpm dev` to host the project locally on port 5173
 
 ## build and preview
@@ -34,15 +33,25 @@ all the package.json scripts can also be run with `npm run x`
 ## //TODO api stuff
 
 - set .ENV file with URLS
-- `FETCH ALL RATINGS` of a product in /Product
+- [x] `FETCH ALL RATINGS` of a product in /Product
   - GET **/api/ratings/{productId}**
-- `POPULAR PRODUCT LIST`
+- [x] `POPULAR PRODUCT LIST`
+
   - fetch some products with higher average vote. Then create a list in "/" with productId, title, price and average vote.
   - GET **/api/popular**
-- `ADD RATING`.
+
+- [ ] `ADD RATING`
+
   - POST **/api/ratings/{productId}/{userId}**
   - come “body” della richiesta un oggetto con gli
-    attributi “voto” (1-5) e “commento”, associa un voto al prodotto. Se per questo
+    attributi vote (1-5) e “message”, associa un voto al prodotto. Se per questo
     utente il voto/commento esiste gia’, viene sovrascritto.
+    - create func in fetch.ts
+    - update UI accordingly
 
-1. work in progress on popular product list.
+- [ ] add average vote
+
+**_dopo che la consegna di raman è stata completata:_**
+
+- [ ] call _addProduct_ api -> create func in fetch.ts
+  - update UI accordingly

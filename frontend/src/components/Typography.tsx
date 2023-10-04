@@ -32,7 +32,7 @@ const Typography: FunctionComponent<Props> = ({ children, variant }) => {
 				</h4>
 			)
 		case 'p':
-			return <p className="leading-7 mt-2 first-of-type:mt-4">{children}</p>
+			return <p className="leading-7 first-of-type:mt-4">{children}</p>
 		case 'code':
 			return (
 				<code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">

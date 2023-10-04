@@ -9,5 +9,8 @@ export interface Product {
 
 export interface RatingType {
   id: number
-
+  vote: number
+  message: string
+  userId: number
+  productId: number
 }

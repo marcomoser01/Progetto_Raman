@@ -17,18 +17,11 @@ export default function ProductList() {
 		location.assign('/Product') //got to that product page
 	}
 
-	// function goToAddProduct() {
-	// 	// const productId: number = 1234 //TODO get this dinamically. this should NOT exist in the DB.
-
-	// 	// localStorage.setItem('productId', productId.toString())
-	// 	// go to page /addProduct
-	// 	location.assign('/addProduct')
-	// }
-
 	useEffect(() => {
 		fetchPopularProducts().then(data => {
 			setPopularProducts(data)
 		})
+		//fetch all ratings I guess. so that i can put them in the table.
 	}, [])
 
 	useEffect(() => {
@@ -89,7 +82,7 @@ export default function ProductList() {
 											{product.price || 0}€
 										</td>
 										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{product.rating || 0}
+											{'ADD AVG RATING' || 0}
 										</td>
 									</tr>
 								))}

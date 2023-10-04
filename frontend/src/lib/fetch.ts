@@ -14,7 +14,12 @@ export async function fetchRatings(productId: number) {
     return
   }
 
-  return (await response.json()) || undefined
+  const responseObj = await response.json()
+  if (Object.keys(responseObj).length === 0) {
+    return
+  }
+
+  return responseObj.content || undefined
 }
 
 //returns an array of products
@@ -27,5 +32,10 @@ export async function fetchPopularProducts(): Promise<Product[] | undefined> {
     return
   }
 
-  return (await response.json()) || undefined
+  const responseObj = await response.json()
+  if (Object.keys(responseObj).length === 0) {
+    return
+  }
+
+  return responseObj || undefined
 }
