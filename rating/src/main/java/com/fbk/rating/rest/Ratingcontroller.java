@@ -14,6 +14,7 @@ import com.fbk.rating.service.RatingService;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class Ratingcontroller {
 
     @Autowired
@@ -25,7 +26,8 @@ public class Ratingcontroller {
     }
 
     @PostMapping("/ratings/{productId}/{userId}")
-    public Rating addRating(@RequestBody RatingRequest rating, @PathVariable String productId, @PathVariable String userId) {
+    public Rating addRating(@RequestBody RatingRequest rating, @PathVariable String productId,
+            @PathVariable String userId) {
         rating.setProduct_id(productId);
         rating.setUser_id(userId);
         return service.saveProduct(rating);
@@ -40,6 +42,5 @@ public class Ratingcontroller {
     public @ResponseBody List<Product> getPopular() {
         return service.getPopular();
     }
-
 
 }

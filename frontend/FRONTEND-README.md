@@ -44,3 +44,5 @@ all the package.json scripts can also be run with `npm run x`
   - come “body” della richiesta un oggetto con gli
     attributi “voto” (1-5) e “commento”, associa un voto al prodotto. Se per questo
     utente il voto/commento esiste gia’, viene sovrascritto.
+
+1. work in progress on popular product list.

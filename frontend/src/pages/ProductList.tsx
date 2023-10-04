@@ -3,44 +3,27 @@
 import { useEffect, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
+import { Link } from 'react-router-dom'
+import { Product } from '@/lib/types'
 import Typography from '@/components/Typography'
+import { cn } from '@/lib/utils'
+import { fetchPopularProducts } from '@/lib/fetch'
 
 export default function ProductList() {
-	const [popularProducts, setPopularProducts] = useState<object[]>()
+	const [popularProducts, setPopularProducts] = useState<Product[] | []>()
 
-	function openProduct(id) {
-		localStorage.setItem('productId', id.toString())
-		// go to page /Product
-		location.assign('/Product')
+	function openProduct(product: Product) {
+		localStorage.setItem('product', JSON.stringify(product))
+		location.assign('/Product') //got to that product page
 	}
 
-	function goToAddProduct() {
-		const productId: number = 1234 //TODO get this dinamically. this should NOT exist in the DB.
+	// function goToAddProduct() {
+	// 	// const productId: number = 1234 //TODO get this dinamically. this should NOT exist in the DB.
 
-		localStorage.setItem('productId', productId.toString())
-		// go to page /addProduct
-		location.assign('/addProduct')
-	}
-
-	async function fetchPopularProducts() {
-		const response = await fetch(URL_BASE + `/popular`)
-		if (!response.ok) {
-			return []
-		}
-
-		const ratingsJSON = await response.json()
-		if (!ratingsJSON.ok) {
-			return []
-		}
-
-		const retrievedRatings: object[] = JSON.parse(ratingsJSON)
-		if (!Array.isArray(retrievedRatings)) {
-			return []
-		}
-		console.log('retrievedFetchThing:\n', retrievedRatings)
-
-		return retrievedRatings || []
-	}
+	// 	// localStorage.setItem('productId', productId.toString())
+	// 	// go to page /addProduct
+	// 	location.assign('/addProduct')
+	// }
 
 	useEffect(() => {
 		fetchPopularProducts().then(data => {
@@ -48,13 +31,23 @@ export default function ProductList() {
 		})
 	}, [])
 
+	useEffect(() => {
+		console.log(popularProducts)
+	}, [popularProducts])
+
 	return (
-		<main className="max-w-2xl mx-auto my-4">
-			<Typography variant="h1">Popular Product List</Typography>
+		<main className="max-w-2xl mx-auto my-4 px-2 py-4">
+			<Typography variant="h1">Popular Products List</Typography>
 			<br />
-			<Button onClick={goToAddProduct}>Add Product</Button>
+			<Button asChild>
+				<Link to="/addProduct">Add Product</Link>
+			</Button>
 			{/* table */}
-			<div className="my-6 w-full overflow-y-auto">
+			<div
+				className={cn('my-6 w-full overflow-y-auto', {
+					hidden: !popularProducts || popularProducts?.length === 0,
+				})}
+			>
 				<table className="w-full">
 					{/* HEADER */}
 					<thead>
@@ -69,7 +62,7 @@ export default function ProductList() {
 								Price
 							</th>
 							<th className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
-								Average Vote
+								Average Rating (stelline)
 							</th>
 						</tr>
 					</thead>
@@ -78,30 +71,39 @@ export default function ProductList() {
 					<tbody>
 						{popularProducts &&
 							popularProducts
-								.sort((a, b) => b.vote - a.vote) //descending order
-								.map(product => (
+								.sort((a, b) => b.rating - a.rating) //descending order
+								.map((product, index) => (
 									<tr
-										className="m-0 border-t p-0 even:bg-muted"
+										className="m-0 border-t p-0 even:bg-muted cursor-pointer hover:bg-slate-900/10"
 										tabIndex={0}
-										onClick={(id = product.productId) => openProduct(id)}
+										key={index}
+										onClick={() => openProduct(product)}
 									>
 										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{product.productId}
+											{product.id || -1}
 										</td>
 										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{product.title}
+											{product.title || 'prodotto'}
 										</td>
 										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{product.price}
+											{product.price || 0}€
 										</td>
 										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{product.vote}
+											{product.rating || 0}
 										</td>
 									</tr>
 								))}
 					</tbody>
 				</table>
 			</div>
+
+			{(!popularProducts || popularProducts?.length === 0) && (
+				<Typography variant="p">
+					(┬┬﹏┬┬) There seems to be no products left.
+					<br />
+					Add one clicking the button above.
+				</Typography>
+			)}
 		</main>
 	)
 }

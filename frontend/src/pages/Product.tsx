@@ -7,64 +7,63 @@ import { Link } from 'react-router-dom'
 import Rating from '@/components/Rating'
 import { Separator } from '@/components/ui/separator'
 import Typography from '@/components/Typography'
+import { fetchRatings } from '@/lib/fetch'
+import { Product, RatingType } from '@/lib/types'
 
-interface Props {
-	productId: number
-}
+export default function Product() {
+	const [ratings, setRatings] = useState<RatingType[] | [] | undefined>()
+	const [product, setProduct] = useState<Product>()
 
-export default function Product({ productId }: Props) {
-	const [ratings, setRatings] = useState<object[] | []>()
-
-	async function fetchRatings() {
-		const response = await fetch(URL_BASE + `/ratings/${productId}`)
-		if (!response.ok) {
-			return []
-		}
-
-		const ratingsJSON = await response.json()
-		if (!ratingsJSON.ok) {
-			return []
-		}
-
-		const retrievedRatings: object[] = JSON.parse(ratingsJSON)
-		if (!Array.isArray(retrievedRatings)) {
-			return []
-		}
-		console.log('retrievedFetchThing:\n', retrievedRatings)
-
-		return retrievedRatings || []
-	}
-
-	//retrieve ratings of specific product
 	useEffect(() => {
-		fetchRatings().then(data => {
-			setRatings(data)
+		setProduct(() => {
+			return JSON.parse(localStorage.getItem('product') || '')
 		})
 	}, [])
 
-	return (
-		<main className="max-w-3xl mx-auto my-4">
-			{/* insert product name */}
-			<Typography variant="h1">
-				Product Name: <span className="bg-gray-300 px-2 rounded">XXXXX</span>{' '}
-				{productId}
-			</Typography>
-			<Typography variant="p">
-				Category: <span className="bg-gray-300 px-2 rounded">XXXXX</span>
-			</Typography>
-			<Typography variant="p">
-				Quantity: <span className="bg-gray-300 px-2 rounded">XXXXX</span>
-			</Typography>
+	//retrieve ratings of specific product
+	// useEffect(() => {
+	// 	fetchRatings(product.id).then(data => {
+	// 		setRatings(data)
+	// 	})
+	// }, [])
 
-			<Separator className="my-4" />
+	if (product) {
+		return (
+			<main className="max-w-3xl mx-auto my-4 px-2 py-4">
+				{/* insert product name */}
+				<Typography variant="h1">
+					Product Name:{' '}
+					<span className="bg-gray-300 px-2 rounded">{product.title}</span>{' '}
+					{product.id}
+				</Typography>
+				<Typography variant="p">
+					Description:{' '}
+					<span className="bg-gray-300 px-2 rounded">
+						{product.description}
+					</span>
+				</Typography>
+				<Typography variant="p">
+					Category:{' '}
+					<span className="bg-gray-300 px-2 rounded">{product.category}</span>
+				</Typography>
+				<Typography variant="p">
+					Quantity:{' '}
+					<span className="bg-gray-300 px-2 rounded">{product.quantity}</span>
+				</Typography>
+				<Typography variant="p">
+					Price:{' '}
+					<span className="bg-gray-300 px-2 rounded">{product.price}€</span>
+				</Typography>
 
-			<Typography variant="h2">Ratings</Typography>
+				<Separator className="my-4" />
 
-			<Button className="mb-8" asChild>
-				<Link to="/addRating">Add Rating</Link>
-			</Button>
+				<Typography variant="h2">Ratings</Typography>
 
-			{ratings &&
+				<Button className="mb-8" asChild>
+					<Link to="/addRating">Add Rating</Link>
+				</Button>
+
+				{/* {ratings &&
 				ratings.map(rating => (
 					<Rating
 						userId={rating.userId}
@@ -79,7 +78,14 @@ export default function Product({ productId }: Props) {
 					≡(▔﹏▔)≡ There is no rating yet. Create one by clicking the button
 					above
 				</Typography>
-			)}
-		</main>
-	)
+			)} */}
+			</main>
+		)
+	} else {
+		return (
+			<Typography variant="h4">
+				¯\_(ツ)_/¯ We're having some problems fetching data...
+			</Typography>
+		)
+	}
 }
