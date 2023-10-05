@@ -3,6 +3,7 @@ package com.fbk.users.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.GeneratedValue;
@@ -10,14 +11,17 @@ import jakarta.persistence.GeneratedValue;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "User")
+@Table(name = "Users")
 public class User {
     @Id
     @GeneratedValue
     private Integer id;
-    private String Name;
-    
-    
+
+    @NotNull
+    private String name;
+    @NotNull
+    private String cognome;
+
     public Integer getId() {
         return id;
     }
@@ -25,10 +29,16 @@ public class User {
         this.id = id;
     }
     public String getName() {
-        return Name;
+        return name;
     }
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getCognome() {
+        return cognome;
+    }
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
     }
     
 

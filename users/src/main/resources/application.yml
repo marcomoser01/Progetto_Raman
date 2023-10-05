@@ -1,3 +1,13 @@
+# spring:
+#     config:
+#         import: http://localhost:8888/db-mysql.yml
 spring:
-    config:
-        import: http://localhost:8888/db-mysql.yml
+  datasource:
+    url: jdbc:mysql://localhost:3306/Shop?createDatabaseIfNotExist=true&esessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false
+    username: root
+    password: Root
+
+  jpa: 
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
