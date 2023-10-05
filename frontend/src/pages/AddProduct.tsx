@@ -63,7 +63,7 @@ export default function AddPRoduct() {
 		if (!result || Object.keys(result).length === 0) {
 			toast({
 				title: 'An error occurred!',
-				description: <p>⊙﹏⊙∥ Either a fetch error or logic one. Don't know</p>,
+				description: "⊙﹏⊙∥ Either a fetch error or logic one. Don't know",
 			})
 		}
 	}
