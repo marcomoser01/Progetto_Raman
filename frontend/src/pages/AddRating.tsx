@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import * as z from 'zod'
 
 import {
@@ -9,22 +11,21 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form'
+import { useEffect, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Link } from 'react-router-dom'
+import { Product } from '@/lib/types'
 import { Textarea } from '@/components/ui/textarea'
 import Typography from '@/components/Typography'
+import { fetchAddRatingToProduct } from '@/lib/fetch'
 import { toast } from '@/components/ui/use-toast'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-interface Props {
-	productId?: string | number
-}
-
 const FormSchema = z.object({
-	userId: z.coerce.number().int().min(2, {
+	userId: z.coerce.number().int().min(1, {
 		message: 'userId must be at least 2 characters.',
 	}),
 	vote: z.coerce.number().int().min(0).max(5, {
@@ -35,24 +36,53 @@ const FormSchema = z.object({
 	}),
 })
 
-export default function AddRating({ productId = 1234 }: Props) {
+export default function AddRating() {
+	const [product, setProduct] = useState<Product>()
+
+	useEffect(() => {
+		setProduct(() => JSON.parse(localStorage.getItem('product') || ''))
+	}, [])
+
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 	})
 
-	function onSubmit(data: z.infer<typeof FormSchema>) {
-		toast({
-			title: 'You submitted the following values:',
-			description: (
-				<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-					<code className="text-white">{JSON.stringify(data, null, 2)}</code>
-				</pre>
-			),
-		})
-		console.log(data)
+	async function onSubmit(data: z.infer<typeof FormSchema>) {
+		let result = undefined
+		if (product) {
+			result = await fetchAddRatingToProduct(
+				product.id,
+				data.userId,
+				data.vote,
+				data.message
+			)
+			if (result && Object.keys(result).length !== 0) {
+				toast({
+					title: 'You submitted the following values:',
+					description: (
+						<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-2">
+							<code className="text-white">
+								{JSON.stringify(result, null, 2)}
+							</code>
+						</pre>
+					),
+				})
+				setTimeout(() => {
+					location.assign('/product')
+				}, 2000)
+			}
+			console.log(data)
+			console.log(result)
+		}
+		if (!product || !result || Object.keys(result).length === 0) {
+			toast({
+				title: 'An error occurred!',
+				description: <p>⊙﹏⊙∥ Either a fetch error or logic one. Don't know</p>,
+			})
+		}
 	}
 
-	if (productId) {
+	if (product && Object.keys(product).length !== 0) {
 		return (
 			<main className="w-fit mx-auto px-2 py-4">
 				<Typography variant="h1">Add Your Rating</Typography>
@@ -120,9 +150,9 @@ export default function AddRating({ productId = 1234 }: Props) {
 	} else {
 		return (
 			<main className="w-fit mx-auto px-2 py-4">
-				<Typography variant="h1">No product id detected (#`-_ゝ-)</Typography>
+				<Typography variant="h1">No product detected (#`-_ゝ-)</Typography>
 				<Button asChild className="mt-4">
-					<Link to="/list">back home 🏠</Link>
+					<Link to="/list">Back Home 🏠</Link>
 				</Button>
 			</main>
 		)

@@ -18,12 +18,16 @@ export default function Rating(rating: RatingType) {
 
 	return (
 		<Card className="mb-4">
-			<CardHeader>
-				<CardTitle>{'<Nome Utente>'}</CardTitle>
-				<CardDescription>{rating.vote}/5</CardDescription>
+			<CardHeader className="pb-2">
+				<div className="flex justify-start gap-4 items-baseline">
+					<CardDescription className="font-mono">
+						{rating.vote}/5
+					</CardDescription>
+					<CardTitle>{'<Nome Utente>'}</CardTitle>
+				</div>
 			</CardHeader>
 			<CardContent>
-				<p>{rating.message}</p>
+				<pre className="font-sans">{rating.message}</pre>
 			</CardContent>
 		</Card>
 	)

@@ -8,6 +8,7 @@ import Product from './pages/Product'
 import ProductList from './pages/ProductList'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { Toaster } from '@/components/ui/toaster'
 
 const router = createBrowserRouter([
 	{
@@ -18,10 +19,10 @@ const router = createBrowserRouter([
 		path: '/product',
 		element: <Product />,
 	},
-	{
-		path: '/list',
-		element: <ProductList />,
-	},
+	// {
+	// 	path: '/list',
+	// 	element: <ProductList />,
+	// },
 	{
 		path: '/addProduct',
 		element: <AddProduct />,
@@ -35,5 +36,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<RouterProvider router={router} />
+		<Toaster></Toaster>
 	</React.StrictMode>
 )

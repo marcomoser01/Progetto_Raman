@@ -11,7 +11,9 @@ import {
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import Typography from '@/components/Typography'
+import { fetchAddProduct } from '@/lib/fetch'
 import { toast } from '@/components/ui/use-toast'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -26,6 +28,12 @@ const FormSchema = z.object({
 	quantity: z.coerce.number().int().min(0, {
 		message: 'Quantity must be a positive integer number',
 	}),
+	price: z.coerce.number().int().min(0, {
+		message: 'Quantity must be a positive integer number',
+	}),
+	description: z.string().min(5, {
+		message: 'Description must be at least 5 characters',
+	}),
 })
 
 export default function AddPRoduct() {
@@ -33,16 +41,31 @@ export default function AddPRoduct() {
 		resolver: zodResolver(FormSchema),
 	})
 
-	function onSubmit(data: z.infer<typeof FormSchema>) {
-		toast({
-			title: 'You submitted the following values:',
-			description: (
-				<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-					<code className="text-white">{JSON.stringify(data, null, 2)}</code>
-				</pre>
-			),
-		})
+	async function onSubmit(data: z.infer<typeof FormSchema>) {
+		const result = await fetchAddProduct(data)
+		if (result && Object.keys(result).length !== 0) {
+			toast({
+				title: 'You submitted the following values:',
+				description: (
+					<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-2">
+						<code className="text-white">
+							{JSON.stringify(result, null, 2)}
+						</code>
+					</pre>
+				),
+			})
+			setTimeout(() => {
+				location.assign('/')
+			}, 2000)
+		}
 		console.log(data)
+		console.log(result)
+		if (!result || Object.keys(result).length === 0) {
+			toast({
+				title: 'An error occurred!',
+				description: <p>⊙﹏⊙∥ Either a fetch error or logic one. Don't know</p>,
+			})
+		}
 	}
 
 	return (
@@ -60,6 +83,23 @@ export default function AddPRoduct() {
 								<FormLabel>Product Title</FormLabel>
 								<FormControl>
 									<Input {...field} />
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="description"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Product Description</FormLabel>
+								<FormControl>
+									<Textarea
+										rows={5}
+										placeholder="Your description of the product"
+										{...field}
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -89,6 +129,24 @@ export default function AddPRoduct() {
 										type="number"
 										min={0}
 										placeholder="How many?"
+										{...field}
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="price"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Price</FormLabel>
+								<FormControl>
+									<Input
+										type="number"
+										min={0}
+										placeholder="How much?"
 										{...field}
 									/>
 								</FormControl>
