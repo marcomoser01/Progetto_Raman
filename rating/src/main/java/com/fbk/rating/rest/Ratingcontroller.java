@@ -13,6 +13,7 @@ import com.fbk.rating.service.RatingService;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
+@CrossOrigin
 public class Ratingcontroller {
 
     @Autowired
