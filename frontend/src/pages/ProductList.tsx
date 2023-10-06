@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import { Product, ProductWithAVGVote } from '@/lib/types'
 import { useEffect, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
-import { Product } from '@/lib/types'
 import Typography from '@/components/Typography'
 import { cn } from '@/lib/utils'
 import { fetchPopularProducts } from '@/lib/fetch'
 
 export default function ProductList() {
-	const [popularProducts, setPopularProducts] = useState<Product[] | []>()
+	const [popularProducts, setPopularProducts] = useState<
+		ProductWithAVGVote[] | []
+	>()
 
 	function openProduct(product: Product) {
 		localStorage.setItem('product', JSON.stringify(product))
@@ -23,10 +25,6 @@ export default function ProductList() {
 		})
 		//fetch all ratings I guess. so that i can put them in the table.
 	}, [])
-
-	useEffect(() => {
-		console.log(popularProducts)
-	}, [popularProducts])
 
 	return (
 		<main className="max-w-2xl mx-auto my-4 px-2 py-4">
@@ -55,7 +53,7 @@ export default function ProductList() {
 								Price
 							</th>
 							<th className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
-								Average Rating (stelline)
+								Average Vote
 							</th>
 						</tr>
 					</thead>
@@ -64,7 +62,7 @@ export default function ProductList() {
 					<tbody>
 						{popularProducts &&
 							popularProducts
-								.sort((a, b) => b.rating - a.rating) //descending order
+								// .sort((a, b) => b.vote - a.vote) //descending order
 								.map((product, index) => (
 									<tr
 										className="m-0 border-t p-0 even:bg-muted cursor-pointer hover:bg-slate-900/10"
@@ -82,7 +80,7 @@ export default function ProductList() {
 											{product.price || 0}€
 										</td>
 										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{'ADD AVG RATING' || 0}
+											{product.avgVote || 0}
 										</td>
 									</tr>
 								))}

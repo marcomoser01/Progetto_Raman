@@ -9,10 +9,13 @@ import {
 	CardTitle,
 } from '@/components/ui/card'
 import { StarFilledIcon, StarIcon } from '@radix-ui/react-icons'
+import { useEffect, useState } from 'react'
 
 import { RatingType } from '@/lib/types'
+import { fetchUser } from '@/lib/fetch'
 
 export default function Rating(rating: RatingType) {
+	const [username, setUsername] = useState<string>()
 	//@ts-ignore
 	rating = rating.rating //don't ask
 
@@ -23,15 +26,27 @@ export default function Rating(rating: RatingType) {
 			stars[filledStars] = 1
 		}
 
-		console.log(`Stars: ${rating.vote}/5 - ${stars}`)
+		// console.log(`Stars: ${rating.vote}/5 - ${stars}`)
 		return stars
 	}
+
+	useEffect(() => {
+		fetchUser(rating.userId).then(user => {
+			if (user) {
+				console.log(user)
+				setUsername(user.name)
+			} else {
+				setUsername('<No username detected>')
+			}
+		})
+		//fetch all ratings I guess. so that i can put them in the table.
+	}, [])
 
 	return (
 		<Card className="mb-4">
 			<CardHeader className="pb-2">
 				{/* <div className="flex justify-start gap-4 items-end"> */}
-				<CardTitle>{'<Nome Utente>'}</CardTitle>
+				<CardTitle>{username}</CardTitle>
 				<CardDescription className="font-mono leading-none">
 					<div className="flex">
 						{throwStarsInTheUniverse().map(starBool =>

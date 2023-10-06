@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { Product, RatingType } from "./types"
+import { Product, ProductWithAVGVote, RatingType, User } from "@/lib/types"
 
 type CreatedProduct = Omit<Product, "id">;
 
 const RATING_URL = import.meta.env.VITE_RATING_URL
 const CATALOG_URL = import.meta.env.VITE_CATALOG_URL
+const USERS_URL = import.meta.env.VITE_USERS_URL
 
 //returns a single rating for a specified product
 export async function fetchRatings(productId: number) {
@@ -26,7 +27,7 @@ export async function fetchRatings(productId: number) {
 }
 
 //returns an array of products
-export async function fetchPopularProducts(): Promise<Product[] | undefined> {
+export async function fetchPopularProducts(): Promise<ProductWithAVGVote[] | undefined> {
   const response = await fetch(RATING_URL + `/popular`, {
     mode: 'cors',
   })
@@ -87,6 +88,25 @@ export async function fetchAddProduct(product: CreatedProduct): Promise<Product 
       "Content-Type": "application/json",
     },
   })
+  if (!response.ok) {
+    console.warn(response.status + response.statusText)
+    return
+  }
+
+  const responseObj = await response.json()
+  if (Object.keys(responseObj).length === 0) {
+    return
+  }
+
+  return responseObj || undefined
+}
+
+//returns a user given the id
+export async function fetchUser(id: number): Promise<User | undefined> {
+  const response = await fetch(USERS_URL + `/user/${id}`, {
+    mode: 'cors',
+  })
+  console.log(response)
   if (!response.ok) {
     console.warn(response.status + response.statusText)
     return
