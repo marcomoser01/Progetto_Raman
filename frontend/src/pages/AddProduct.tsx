@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import * as z from 'zod'
 
 import {
@@ -28,9 +30,20 @@ const FormSchema = z.object({
 	quantity: z.coerce.number().int().min(0, {
 		message: 'Quantity must be a positive integer number',
 	}),
-	price: z.coerce.number().int().min(0, {
-		message: 'Quantity must be a positive integer number',
-	}),
+	price: z.coerce
+		.number()
+		.min(0, {
+			message: 'Quantity must be a positive integer number',
+		})
+		.refine(
+			n => {
+				return (
+					/^([\d]+)$/.test(n.toString()) ||
+					n.toString().split('.')[1]?.length <= 2
+				)
+			},
+			() => ({ message: 'Max precision is 2 decimal places' })
+		),
 	description: z.string().min(5, {
 		message: 'Description must be at least 5 characters',
 	}),
@@ -143,12 +156,7 @@ export default function AddPRoduct() {
 							<FormItem>
 								<FormLabel>Price</FormLabel>
 								<FormControl>
-									<Input
-										type="number"
-										min={0}
-										placeholder="How much?"
-										{...field}
-									/>
+									<Input placeholder="How much?" {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
