@@ -33,7 +33,7 @@ const FormSchema = z.object({
 	price: z.coerce
 		.number()
 		.min(0, {
-			message: 'Quantity must be a positive integer number',
+			message: 'Quantity must be a positive number',
 		})
 		.refine(
 			n => {
@@ -95,7 +95,7 @@ export default function AddPRoduct() {
 							<FormItem>
 								<FormLabel>Product Title</FormLabel>
 								<FormControl>
-									<Input {...field} />
+									<Input maxLength={100} {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -110,6 +110,7 @@ export default function AddPRoduct() {
 								<FormControl>
 									<Textarea
 										rows={5}
+										maxLength={1000}
 										placeholder="Your description of the product"
 										{...field}
 									/>
@@ -125,7 +126,11 @@ export default function AddPRoduct() {
 							<FormItem>
 								<FormLabel>Category</FormLabel>
 								<FormControl>
-									<Input placeholder="Category name" {...field} />
+									<Input
+										maxLength={30}
+										placeholder="Category name"
+										{...field}
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -141,6 +146,7 @@ export default function AddPRoduct() {
 									<Input
 										type="number"
 										min={0}
+										max={10000}
 										placeholder="How many?"
 										{...field}
 									/>
@@ -156,7 +162,7 @@ export default function AddPRoduct() {
 							<FormItem>
 								<FormLabel>Price</FormLabel>
 								<FormControl>
-									<Input placeholder="How much?" {...field} />
+									<Input maxLength={15} placeholder="How much?" {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
