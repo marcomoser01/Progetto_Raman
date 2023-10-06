@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "config-server"
+		},
+		{
+			"path": "registry"
+		}
+	]
+}

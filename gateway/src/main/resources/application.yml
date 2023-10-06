@@ -18,10 +18,10 @@ spring:
             - Path=/catalog/**
           filters:
             - StripPrefix=1
-        - id: puchase
-          uri: lb://PURCHASE
+        - id: users
+          uri: lb://USERS
           predicates:
-            - Path=/puchase/**
+            - Path=/users/**
           filters:
             - StripPrefix=1
         - id: rating
@@ -30,9 +30,9 @@ spring:
             - Path=/rating/**
           filters:
             - StripPrefix=1
-        - id: users
-          uri: lb://USERS
+        - id: purchase
+          uri: lb://PURCHASE
           predicates:
-            - Path=/users/**
+            - Path=/purchase/**
           filters:
             - StripPrefix=1

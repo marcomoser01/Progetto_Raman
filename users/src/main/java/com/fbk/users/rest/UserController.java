@@ -3,8 +3,6 @@ package com.fbk.users.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import com.fbk.users.domain.User;
@@ -13,14 +11,15 @@ import com.fbk.users.services.UserService;
 
 @RestController()
 @RequestMapping("/api")
+@CrossOrigin
 public class UserController {
     
     @Autowired
     private UserService service;
     
     @GetMapping("/users")
-    public @ResponseBody Page<User> listUsers(Pageable page) {
-        return service.getAllUsers(page);
+    public @ResponseBody List<User> listUsers() {
+        return service.getAllUsers();
     }
 
     @GetMapping("/user/{id}")

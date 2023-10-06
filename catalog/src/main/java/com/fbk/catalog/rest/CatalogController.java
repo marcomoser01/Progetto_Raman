@@ -12,6 +12,7 @@ import com.fbk.catalog.service.ProductService;
 
 @RestController()
 @RequestMapping("/api")
+@CrossOrigin
 public class CatalogController {
     
     @Autowired
@@ -23,7 +24,7 @@ public class CatalogController {
         return service.getProducts();
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/product/{id}")
     public @ResponseBody Product getProduct(@PathVariable String id) {
         return service.getProduct(id);
     }
@@ -36,6 +37,11 @@ public class CatalogController {
     @PostMapping("/addProduct")
     public Product addProduct(@RequestBody Product product) {
         return service.saveProduct(product);
+    }
+
+    @PostMapping("/addProducts")
+    public List<Product> addProducts(@RequestBody List<Product> products) {
+        return service.saveProducts(products);
     }
 
     @PutMapping("/products/{id}/availability/{amount}")

@@ -35,6 +35,6 @@ public class ProductService {
 	}
 
 	public Product getProduct(String product_id) {
-		return restTemplate.getForObject(endpoint + "/api/products/{productId}", Product.class, product_id);
+		return restTemplate.getForObject(endpoint + "/api/product/{productId}", Product.class, product_id);
 	}
 }

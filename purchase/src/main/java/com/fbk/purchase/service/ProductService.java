@@ -14,7 +14,9 @@ public class ProductService {
 	private RestTemplate restTemplate = new RestTemplate();
 	
 	public Product getProduct(String productId) {
-		return restTemplate.getForObject(endpoint + "/api/products/{productId}", Product.class, productId);
+		String api = endpoint + "/api/product/" + productId;
+		return restTemplate.getForObject(api, Product.class);
+		// return restTemplate.getForObject(endpoint + "/api/product/{productId}", Product.class, productId);
 	}
 	
 	public Product bookAvailability(String productId, int quantity) {

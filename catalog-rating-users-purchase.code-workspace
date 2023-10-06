@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "catalog"
+		},
+		{
+			"path": "purchase"
+		},
+		{
+			"path": "rating"
+		},
+		{
+			"path": "users"
+		}
+	]
+}
