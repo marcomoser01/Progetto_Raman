@@ -12,7 +12,7 @@ import { fetchRatings } from '@/lib/fetch'
 import { Product, RatingType } from '@/lib/types'
 
 export default function Product() {
-	const [ratings, setRatings] = useState<RatingType[] | undefined>()
+	const [ratings, setRatings] = useState<RatingType[]>()
 	const [product, setProduct] = useState<Product>()
 
 	useEffect(() => {
@@ -23,7 +23,7 @@ export default function Product() {
 
 	// retrieve ratings of specific product
 	useEffect(() => {
-		if (typeof product === 'object' && product) {
+		if (product && typeof product === 'object') {
 			fetchRatings(product.id).then(data => {
 				setRatings(data)
 			})

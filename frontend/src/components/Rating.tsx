@@ -33,7 +33,6 @@ export default function Rating(rating: RatingType) {
 	useEffect(() => {
 		fetchUser(rating.userId).then(user => {
 			if (user) {
-				console.log(user)
 				setUsername(user.name)
 			} else {
 				setUsername('<No username detected>')
