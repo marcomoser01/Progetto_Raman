@@ -12,7 +12,7 @@ import { fetchPopularProducts } from '@/lib/fetch'
 export default function ProductList() {
 	const [popularProducts, setPopularProducts] = useState<ProductWithAVGVote[]>()
 
-	function openProduct(product: Product) {
+	function openProduct(product: ProductWithAVGVote) {
 		// localStorage.setItem('product', JSON.stringify(product))
 		localStorage.setItem('product', JSON.stringify(product.product))
 		location.assign('/Product') //got to that product page
@@ -44,10 +44,10 @@ export default function ProductList() {
 					<thead>
 						<tr className="m-0 border-t p-0 even:bg-muted">
 							<th className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
-								Product ID
+								ID
 							</th>
 							<th className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
-								Product Title
+								Product
 							</th>
 							<th className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
 								Price
@@ -83,7 +83,9 @@ export default function ProductList() {
 											{product.product.price || 0}€
 										</td>
 										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{product.avgVote || 0}
+											{(product.avgVote % 1 === 0
+												? product.avgVote
+												: product.avgVote.toFixed(1)) || 0}
 										</td>
 									</tr>
 								))}

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { Product, ProductWithAVGVote, RatingType, User } from "@/lib/types"
+import { Product, ProductWithAVGVote, RatingInterface, User } from "@/lib/types"
 
 type CreatedProduct = Omit<Product, "id">;
 
@@ -49,7 +49,7 @@ export async function fetchPopularProducts(): Promise<ProductWithAVGVote[] | und
 }
 
 //returns the rating created
-export async function fetchAddRatingToProduct(productId: number, userId: number, vote: number, message: string): Promise<RatingType | undefined> {
+export async function fetchAddRatingToProduct(productId: number, userId: number, vote: number, message: string): Promise<RatingInterface | undefined> {
   //
   const response = await fetch(RATING_URL + `/ratings/${productId}/${userId}`, {
     method: 'POST',
@@ -62,6 +62,7 @@ export async function fetchAddRatingToProduct(productId: number, userId: number,
       "Content-Type": "application/json",
     },
   })
+  console.log(response)
   if (!response.ok) {
     console.warn(response.status + response.statusText)
     return

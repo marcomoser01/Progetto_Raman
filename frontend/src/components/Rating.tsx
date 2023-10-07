@@ -11,16 +11,22 @@ import {
 import { StarFilledIcon, StarIcon } from '@radix-ui/react-icons'
 import { useEffect, useState } from 'react'
 
-import { RatingType } from '@/lib/types'
+import { RatingInterface } from '@/lib/types'
 import { fetchUser } from '@/lib/fetch'
 
-export default function Rating(rating: RatingType) {
+export default function Rating({
+	id,
+	message,
+	productId,
+	userId,
+	vote,
+}: RatingInterface) {
 	const [username, setUsername] = useState<string>()
 
 	function throwStarsInTheUniverse() {
 		const stars = [0, 0, 0, 0, 0]
 
-		for (let filledStars = 0; filledStars < rating.vote; filledStars++) {
+		for (let filledStars = 0; filledStars < vote; filledStars++) {
 			stars[filledStars] = 1
 		}
 
@@ -28,8 +34,7 @@ export default function Rating(rating: RatingType) {
 	}
 
 	useEffect(() => {
-		console.log(rating)
-		fetchUser(rating.userId).then(user => {
+		fetchUser(userId).then(user => {
 			if (user) {
 				setUsername(user.name + ' ' + user.cognome)
 			} else {
@@ -58,7 +63,7 @@ export default function Rating(rating: RatingType) {
 				{/* </div> */}
 			</CardHeader>
 			<CardContent>
-				<pre className="font-sans">{rating.message}</pre>
+				<pre className="font-sans">{message}</pre>
 			</CardContent>
 		</Card>
 	)

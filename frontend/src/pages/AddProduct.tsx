@@ -63,6 +63,9 @@ export default function AddPRoduct() {
 		const result = await fetchAddProduct(data)
 		if (result && Object.keys(result).length !== 0) {
 			toast({
+				className: cn(
+					'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4'
+				),
 				title: 'You submitted the following values:',
 				description: (
 					<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-2">
@@ -83,8 +86,6 @@ export default function AddPRoduct() {
 			})
 		}
 	}
-
-	function revealLinkToProductList() {}
 
 	return (
 		<main className="w-fit mx-auto px-2 py-4">

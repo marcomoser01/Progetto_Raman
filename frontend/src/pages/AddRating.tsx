@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom'
 import { Product } from '@/lib/types'
 import { Textarea } from '@/components/ui/textarea'
 import Typography from '@/components/Typography'
+import { cn } from '@/lib/utils'
 import { fetchAddRatingToProduct } from '@/lib/fetch'
 import { toast } from '@/components/ui/use-toast'
 import { useForm } from 'react-hook-form'
@@ -38,6 +39,7 @@ const FormSchema = z.object({
 
 export default function AddRating() {
 	const [product, setProduct] = useState<Product>()
+	const [submitted, setSubmitted] = useState<boolean>(false)
 
 	useEffect(() => {
 		setProduct(() => JSON.parse(localStorage.getItem('product') || ''))
@@ -58,6 +60,9 @@ export default function AddRating() {
 			)
 			if (result && Object.keys(result).length !== 0) {
 				toast({
+					className: cn(
+						'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4'
+					),
 					title: 'You submitted the following values:',
 					description: (
 						<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-2">
@@ -67,9 +72,7 @@ export default function AddRating() {
 						</pre>
 					),
 				})
-				setTimeout(() => {
-					location.assign('/product')
-				}, 2000)
+				setSubmitted(true)
 			}
 			console.log(data)
 			console.log(result)
@@ -142,7 +145,16 @@ export default function AddRating() {
 								</FormItem>
 							)}
 						/>
-						<Button type="submit">Submit 🚀</Button>
+						<div className="flex justify-between">
+							<Button type="submit">Submit 🚀</Button>
+							<Button
+								type="button"
+								asChild
+								className={cn({ hidden: !submitted })}
+							>
+								<Link to="/Product">Back to Product ⏪</Link>
+							</Button>
+						</div>
 					</form>
 				</Form>
 			</main>
