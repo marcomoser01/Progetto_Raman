@@ -16,8 +16,6 @@ import { fetchUser } from '@/lib/fetch'
 
 export default function Rating(rating: RatingType) {
 	const [username, setUsername] = useState<string>()
-	//@ts-ignore
-	rating = rating.rating //don't ask
 
 	function throwStarsInTheUniverse() {
 		const stars = [0, 0, 0, 0, 0]
@@ -26,14 +24,14 @@ export default function Rating(rating: RatingType) {
 			stars[filledStars] = 1
 		}
 
-		// console.log(`Stars: ${rating.vote}/5 - ${stars}`)
 		return stars
 	}
 
 	useEffect(() => {
+		console.log(rating)
 		fetchUser(rating.userId).then(user => {
 			if (user) {
-				setUsername(user.name)
+				setUsername(user.name + ' ' + user.cognome)
 			} else {
 				setUsername('<No username detected>')
 			}
@@ -48,11 +46,11 @@ export default function Rating(rating: RatingType) {
 				<CardTitle>{username}</CardTitle>
 				<CardDescription className="font-mono leading-none">
 					<div className="flex">
-						{throwStarsInTheUniverse().map(starBool =>
+						{throwStarsInTheUniverse().map((starBool, i) =>
 							starBool ? (
-								<StarFilledIcon className="[&>path]:fill-slate-950" />
+								<StarFilledIcon key={i} className="[&>path]:fill-slate-950" />
 							) : (
-								<StarIcon />
+								<StarIcon key={i} />
 							)
 						)}
 					</div>

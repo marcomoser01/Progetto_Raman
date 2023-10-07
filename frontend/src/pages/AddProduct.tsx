@@ -13,11 +13,14 @@ import {
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Link } from 'react-router-dom'
 import { Textarea } from '@/components/ui/textarea'
 import Typography from '@/components/Typography'
+import { cn } from '@/lib/utils'
 import { fetchAddProduct } from '@/lib/fetch'
 import { toast } from '@/components/ui/use-toast'
 import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 const FormSchema = z.object({
@@ -50,6 +53,8 @@ const FormSchema = z.object({
 })
 
 export default function AddPRoduct() {
+	const [submitted, setSubmitted] = useState<boolean>(false)
+
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 	})
@@ -67,9 +72,7 @@ export default function AddPRoduct() {
 					</pre>
 				),
 			})
-			setTimeout(() => {
-				location.assign('/')
-			}, 2000)
+			setSubmitted(true)
 		}
 		console.log(data)
 		console.log(result)
@@ -80,6 +83,8 @@ export default function AddPRoduct() {
 			})
 		}
 	}
+
+	function revealLinkToProductList() {}
 
 	return (
 		<main className="w-fit mx-auto px-2 py-4">
@@ -168,7 +173,16 @@ export default function AddPRoduct() {
 							</FormItem>
 						)}
 					/>
-					<Button type="submit">Submit 🚀</Button>
+					<div className="flex justify-between">
+						<Button type="submit">Submit 🚀</Button>
+						<Button
+							type="button"
+							asChild
+							className={cn({ hidden: !submitted })}
+						>
+							<Link to="/">Back to Product List ⏪</Link>
+						</Button>
+					</div>
 				</form>
 			</Form>
 		</main>

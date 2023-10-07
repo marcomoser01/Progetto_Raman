@@ -13,15 +13,17 @@ export default function ProductList() {
 	const [popularProducts, setPopularProducts] = useState<ProductWithAVGVote[]>()
 
 	function openProduct(product: Product) {
-		localStorage.setItem('product', JSON.stringify(product))
+		// localStorage.setItem('product', JSON.stringify(product))
+		localStorage.setItem('product', JSON.stringify(product.product))
 		location.assign('/Product') //got to that product page
 	}
 
 	useEffect(() => {
 		fetchPopularProducts().then(data => {
-			setPopularProducts(data)
+			if (data) {
+				setPopularProducts(data)
+			}
 		})
-		//fetch all ratings I guess. so that i can put them in the table.
 	}, [])
 
 	return (
@@ -72,13 +74,13 @@ export default function ProductList() {
 										}
 									>
 										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{product.id || -1}
+											{product.product.id || -1}
 										</td>
 										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{product.title || 'prodotto'}
+											{product.product.title || 'prodotto'}
 										</td>
 										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{product.price || 0}€
+											{product.product.price || 0}€
 										</td>
 										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
 											{product.avgVote || 0}

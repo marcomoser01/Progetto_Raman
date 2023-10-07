@@ -22,8 +22,10 @@ export async function fetchRatings(productId: number) {
   if (Object.keys(responseObj).length === 0) {
     return
   }
+  // console.log(responseObj)
+  // console.log(responseObj.content)
 
-  return responseObj.content || undefined
+  return responseObj || undefined
 }
 
 //returns an array of products
@@ -31,6 +33,7 @@ export async function fetchPopularProducts(): Promise<ProductWithAVGVote[] | und
   const response = await fetch(RATING_URL + `/popular`, {
     mode: 'cors',
   })
+
   if (!response.ok) {
     console.warn(response.status, response.statusText)
     return
@@ -40,6 +43,7 @@ export async function fetchPopularProducts(): Promise<ProductWithAVGVote[] | und
   if (Object.keys(responseObj).length === 0) {
     return
   }
+  console.log(responseObj)
 
   return responseObj || undefined
 }
@@ -113,6 +117,7 @@ export async function fetchUser(id: number): Promise<User | undefined> {
   }
 
   const responseObj = await response.json()
+  console.log(responseObj)
   if (Object.keys(responseObj).length === 0) {
     return
   }

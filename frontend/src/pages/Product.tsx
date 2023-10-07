@@ -59,7 +59,7 @@ export default function Product() {
 					ratings.map((rating, index) => (
 						<div key={index}>
 							{/*@ts-ignore*/}
-							<Rating rating={rating} />
+							<Rating rating={rating.rating} />
 						</div>
 					))}
 
