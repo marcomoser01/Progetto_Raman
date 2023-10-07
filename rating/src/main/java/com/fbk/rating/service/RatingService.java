@@ -47,19 +47,33 @@ public class RatingService {
         return ProductAndAvg.sortList(productAndAvgs);
     }
 
-
     public Rating saveProduct(RatingRequest ratingReq, String productId, String userId) {
-        Rating rating = new Rating();
         User user = userService.getUser(userId);
         Product product = productService.getProduct(productId);
         if (user != null && product != null) {
+            Rating rating = getIdRating(productId, userId);
+            if (rating == null) {
+                rating = new Rating();
+                rating.setuserId(userId);
+                rating.setproductId(productId);
+            }
             rating.setMessage(ratingReq.getMessage());
             rating.setVote(ratingReq.getVote());
-            rating.setuserId(userId);
-            rating.setproductId(productId);
             return repo.save(rating);
         }
-        return rating;
+        return null;
     }
+
+    public Rating getIdRating(String productId, String userId) {
+        Rating rating = repo.findByProductIdAndUserId(Integer.parseInt(productId),  Integer.parseInt(userId));
+        if (rating != null) {
+            return rating;
+        }
+        return null; // Ritorna null se non esiste una recensione per l'utente e il prodotto
+                     // specificati.
+    }
+
+    
+    
 
 }
