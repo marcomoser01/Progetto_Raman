@@ -1,11 +1,7 @@
 package com.fbk.rating.domain;
 
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -21,10 +17,7 @@ public class Rating {
     private Integer id;
     private Integer vote;
     private String message;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
-    private User user;
-    // private Integer userId;
+    private Integer userId;
     private Integer productId;
 
     public Integer getId() {
@@ -51,17 +44,17 @@ public class Rating {
         this.message = message;
     }
 
-    // public Integer getuserId() {
-    //     return userId;
-    // }
+    public Integer getuserId() {
+        return userId;
+    }
 
-    // public void setuserId(Integer userId) {
-    //     this.userId = userId;
-    // }
+    public void setuserId(Integer userId) {
+        this.userId = userId;
+    }
 
-    // public void setuserId(String userId) {
-    //     this.userId = Integer.parseInt(userId);
-    // }
+    public void setuserId(String userId) {
+        this.userId = Integer.parseInt(userId);
+    }
 
     public Integer getproductId() {
         return productId;
