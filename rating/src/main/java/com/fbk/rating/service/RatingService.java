@@ -54,7 +54,7 @@ public class RatingService {
             Rating rating = getIdRating(productId, userId);
             if (rating == null) {
                 rating = new Rating();
-                rating.setuserId(userId);
+                // rating.setuserId(userId);
                 rating.setproductId(productId);
             }
             rating.setMessage(ratingReq.getMessage());
