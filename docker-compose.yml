@@ -1,0 +1,36 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Root
+    ports:
+      - 3306:3306
+    # Altre configurazioni per MySQL
+
+  configServer:
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    ports:
+      - 8888:8888
+
+  registry:
+    build:
+      context: ./registry
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    ports:
+      - 8761:8761
+
+  catalog:
+    build:
+      context: ./catalog
+      dockerfile: Dockerfile
+    depends_on:
+      - configServer
+    ports:
+      - 8080:8080
