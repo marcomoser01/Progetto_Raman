@@ -49,6 +49,9 @@ services:
       - 8080:8080
     networks:
       - my_network
+    links:
+      - config-server
+    restart: on-failure
 
 networks:
   my_network:
