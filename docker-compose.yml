@@ -10,7 +10,7 @@ services:
       - my_network
 
   zipkin:
-    image: zipkin:latest
+    image: openzipkin/zipkin
     ports:
       - 9411:9411
     networks:
