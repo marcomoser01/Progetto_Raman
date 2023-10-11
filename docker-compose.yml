@@ -6,7 +6,8 @@ services:
       MYSQL_ROOT_PASSWORD: Root
     ports:
       - 3306:3306
-    # Altre configurazioni per MySQL
+    networks:
+      - my_network
 
   config-server:
     build:
@@ -16,6 +17,8 @@ services:
       - mysql
     ports:
       - 8888:8888
+    networks:
+      - my_network
 
   registry:
     build:
@@ -25,6 +28,8 @@ services:
       - mysql
     ports:
       - 8761:8761
+    networks:
+      - my_network
 
   catalog:
     build:
@@ -34,3 +39,8 @@ services:
       - config-server
     ports:
       - 8080:8080
+    networks:
+      - my_network
+
+networks:
+  my_network:
