@@ -45,12 +45,15 @@ services:
     depends_on:
       - config-server
       - zipkin
+      - registry
     ports:
       - 8080:8080
     networks:
       - my_network
     links:
       - config-server
+      - registry
+      - zipkin
     restart: on-failure
 
 networks:
