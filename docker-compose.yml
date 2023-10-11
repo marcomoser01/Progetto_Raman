@@ -9,6 +9,13 @@ services:
     networks:
       - my_network
 
+  zipkin:
+    image: zipkin:latest
+    ports:
+      - 9411:9411
+    networks:
+      - my_network
+
   config-server:
     build:
       context: ./config-server
@@ -37,6 +44,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - config-server
+      - zipkin
     ports:
       - 8080:8080
     networks:
