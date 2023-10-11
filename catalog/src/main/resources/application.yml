@@ -1,4 +1,8 @@
 spring:
-    config:
-        import: http://config-server:8888/db-mysql-docker.yml
+  config:
+    import: http://config-server:8888/db-mysql-docker.yml
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
