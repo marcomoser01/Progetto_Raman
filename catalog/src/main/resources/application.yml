@@ -2,9 +2,3 @@ spring:
   config:
     import: http://config-server:8888/db-mysql-docker.yml
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://registry:8761/eureka}
-  instance:
-    preferIpAddress: true
