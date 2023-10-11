@@ -8,7 +8,7 @@ services:
       - 3306:3306
     # Altre configurazioni per MySQL
 
-  configServer:
+  config-server:
     build:
       context: ./config-server
       dockerfile: Dockerfile
@@ -31,6 +31,6 @@ services:
       context: ./catalog
       dockerfile: Dockerfile
     depends_on:
-      - configServer
+      - config-server
     ports:
       - 8080:8080
