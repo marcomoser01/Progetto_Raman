@@ -5,4 +5,4 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://registry:8761/eureka/
+      defaultZone: http://progetto_raman-registry-1:8761/eureka/
