@@ -1,4 +1,4 @@
 spring:
     config:
-        import: http://localhost:8888/db-mysql.yml
+        import: http://config-server:8888/db-mysql-docker.yml
 
