@@ -8,16 +8,14 @@ COPY pom.xml /app/
 # Imposta la directory di lavoro corrente su /app
 WORKDIR /app
 
-# Pulizia e compilazione del progetto
-RUN mvn clean
-RUN mvn package
-
+# Pulizia e compilazione del progetto in un'unica istruzione
+RUN mvn clean package
 
 # Usa un'immagine di base con Java
 FROM openjdk:19-alpine
 
-# Copia il file JAR dell'applicativo nella directory /app
-COPY target/catalog-1.0.jar /app/app.jar
+# Copia il file JAR dell'applicativo dalla fase di compilazione nella directory /app
+COPY --from=build /app/target/catalog-1.0.jar /app/app.jar
 
 # Imposta la directory di lavoro corrente
 WORKDIR /app
