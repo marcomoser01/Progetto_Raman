@@ -48,6 +48,7 @@ services:
       context: ./catalog
       dockerfile: Dockerfile
     depends_on:
+      - catalog-build
       - config-server
       - zipkin
       - registry
@@ -60,6 +61,15 @@ services:
       - registry
       - zipkin
     restart: on-failure
+
+  catalog-build:
+    image: maven:3.8.3-openjdk-11
+    build:
+      context: ./catalog
+      dockerfile: Dockerfile
+    command: mvn clean package
+    volumes:
+      - ./catalog:/app
 
 networks:
   my_network:
