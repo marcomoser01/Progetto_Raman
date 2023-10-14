@@ -1,6 +1,7 @@
 version: '3'
 services:
   mysql:
+    container_name: mysql
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: Root
@@ -10,6 +11,7 @@ services:
       - my_network
 
   zipkin:
+    container_name: zipkin
     image: openzipkin/zipkin
     ports:
       - 9411:9411
@@ -17,6 +19,7 @@ services:
       - my_network
 
   config-server:
+    container_name: config-server
     build:
       context: ./config-server
       dockerfile: Dockerfile
@@ -28,6 +31,7 @@ services:
       - my_network
 
   registry:
+    container_name: registry
     build:
       context: ./registry
       dockerfile: Dockerfile
@@ -39,6 +43,7 @@ services:
       - my_network
 
   catalog:
+    container_name: catalog
     build:
       context: ./catalog
       dockerfile: Dockerfile
