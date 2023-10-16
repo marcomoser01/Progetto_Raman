@@ -66,3 +66,86 @@ services:
       - registry
       - zipkin
     restart: on-failure
+
+  gateway:
+    container_name: gateway
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - zipkin
+      - registry
+    ports:
+      - 9999:9999
+    networks:
+      - my_network
+    links:
+      - config-server
+      - registry
+      - zipkin
+    restart: on-failure
+
+  purchase:
+    container_name: purchase
+    build:
+      context: ./purchase
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - zipkin
+      - registry
+      - catalog
+    ports:
+      - 8090:8090
+    networks:
+      - my_network
+    links:
+      - config-server
+      - registry
+      - zipkin
+      - catalog
+    restart: on-failure
+
+  rating:
+    container_name: rating
+    build:
+      context: ./rating
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - zipkin
+      - registry
+      - catalog
+      - user
+    ports:
+      - 8060:8060
+    networks:
+      - my_network
+    links:
+      - config-server
+      - registry
+      - zipkin
+      - user
+    restart: on-failure
+
+  user:
+    container_name: user
+    build:
+      context: ./user
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - zipkin
+      - registry
+      - catalog
+    ports:
+      - 8070:8070
+    networks:
+      - my_network
+    links:
+      - config-server
+      - registry
+      - zipkin
+      - catalog
+    restart: on-failure
