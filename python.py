@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import os
 import subprocess
 
@@ -18,9 +17,8 @@ def run_mvn_command_in_directory(directory_path):
     except subprocess.CalledProcessError as e:
         print(f"Errore nell'esecuzione di '{mvn_command}' in '{directory_path}': {e}")
 
-# Scansiona tutte le sottodirectory nella directory principale
-for root, dirs, files in os.walk(base_dir):
-    for directory in dirs:
-        # Crea il percorso completo della sottodirectory
-        directory_path = os.path.join(root, directory)
+# Scansiona le sottodirectory solo al primo livello
+for directory in os.listdir(base_dir):
+    directory_path = os.path.join(base_dir, directory)
+    if os.path.isdir(directory_path):
         run_mvn_command_in_directory(directory_path)

@@ -22,16 +22,6 @@ services:
     networks:
       - my_network
 
-  config-server-build:
-    image: maven:3.8.3-openjdk-11
-    build:
-      context: ./config-server
-      dockerfile: Dockerfile
-    command: mvn clean package
-    volumes:
-      - ./config-server:/app
-    container_name: config-server-build
-
   config-server:
     container_name: config-server
     build:
@@ -39,22 +29,11 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - mysql
-      - config-server-build
     ports:
       - 8888:8888
     networks:
       - my_network
     restart: on-failure
-
-  registry-build:
-    image: maven:3.8.3-openjdk-11
-    build:
-      context: ./registry
-      dockerfile: Dockerfile
-    command: mvn clean package
-    volumes:
-      - ./registry:/app
-    container_name: registry-build
 
   registry:
     container_name: registry
@@ -63,22 +42,11 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - mysql
-      - registry-build
     ports:
       - 8761:8761
     networks:
       - my_network
     restart: on-failure
-
-  catalog-build:
-    image: maven:3.8.3-openjdk-11
-    build:
-      context: ./catalog
-      dockerfile: Dockerfile
-    command: mvn clean package
-    volumes:
-      - ./catalog:/app
-    container_name: catalog-build
 
   catalog:
     container_name: catalog
@@ -86,7 +54,6 @@ services:
       context: ./catalog
       dockerfile: Dockerfile
     depends_on:
-      - catalog-build
       - config-server
       - zipkin
       - registry
