@@ -11,13 +11,17 @@ mvn_command = 'mvn clean package'
 
 # Funzione per eseguire il comando in una directory specifica
 def run_mvn_command_in_directory(directory_path):
-    try:
-        # Ignora l'output dei comandi
-        with open(os.devnull, 'w') as null:
-            subprocess.run(mvn_command, shell=True, cwd=directory_path, check=True, stdout=null, stderr=null)
-        check_jar_file(directory_path)
-    except subprocess.CalledProcessError as e:
-        print(f"Errore nell'esecuzione di '{mvn_command}' in '{directory_path}': {e}")
+    # Controlla la presenza di un file pom.xml
+    if os.path.exists(os.path.join(directory_path, 'pom.xml')):
+        try:
+            # Ignora l'output dei comandi
+            with open(os.devnull, 'w') as null:
+                subprocess.run(mvn_command, shell=True, cwd=directory_path, check=True, stdout=null, stderr=null)
+            check_jar_file(directory_path)
+        except subprocess.CalledProcessError as e:
+            print(f"Errore nell'esecuzione di '{mvn_command}' in '{directory_path}': {e}")
+    else:
+        print(f"Nessun file pom.xml trovato in '{directory_path}' - Ignorato")
 
 # Funzione per controllare la presenza di un file .jar nella cartella target
 def check_jar_file(directory_path):
