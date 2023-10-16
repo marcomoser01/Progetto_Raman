@@ -44,6 +44,7 @@ services:
       - 8888:8888
     networks:
       - my_network
+    restart: on-failure
 
   registry-build:
     image: maven:3.8.3-openjdk-11
@@ -67,6 +68,7 @@ services:
       - 8761:8761
     networks:
       - my_network
+    restart: on-failure
 
   catalog-build:
     image: maven:3.8.3-openjdk-11
