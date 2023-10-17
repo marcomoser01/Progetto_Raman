@@ -1,0 +1,1 @@
+Per far partire tutto bisogna prima eseguire il file python `mvn-package` e poi eseguire il comando `docker compose up -d`
