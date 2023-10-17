@@ -1,6 +1,8 @@
 package com.fbk.rating.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,19 @@ public class Ratingcontroller {
 
     @Autowired
     private RatingService service;
+
+    @GetMapping("/api/info")
+    public Map<String, String> apiInfo() {
+        Map<String, String> info = new HashMap<>();
+
+        info.put("GET /rating/{id}", "Restituisce le valutazioni per un utente specifico.");
+        info.put("POST /ratings/{productId}/{userId}",
+                "Aggiunge una valutazione per un prodotto specifico da parte di un utente.");
+        info.put("GET /ratings/{productId}", "Restituisce le valutazioni per un prodotto specifico.");
+        info.put("GET /popular", "Restituisce i prodotti popolari basati sulle valutazioni.");
+
+        return info;
+    }
 
     @GetMapping("/rating/{id}")
     public @ResponseBody List<Rating> getRatingsByUserId(@PathVariable String id) {

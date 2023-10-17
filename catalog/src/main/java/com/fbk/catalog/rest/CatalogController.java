@@ -1,6 +1,8 @@
 package com.fbk.catalog.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,20 @@ public class CatalogController {
     
     @Autowired
     private ProductService service;
+
+    @GetMapping("/info")
+    public Map<String, String> apiInfo() {
+        Map<String, String> apiInfo = new HashMap<>();
+        
+        apiInfo.put("GET /api/products", "Ottieni l'elenco dei prodotti disponibili");
+        apiInfo.put("GET /api/product/{id}", "Ottieni un prodotto specifico per ID");
+        apiInfo.put("GET /api/products/category/{category}", "Trova prodotti per categoria");
+        apiInfo.put("POST /api/addProduct", "Aggiungi un nuovo prodotto");
+        apiInfo.put("POST /api/addProducts", "Aggiungi una lista di prodotti");
+        apiInfo.put("PUT /api/products/{id}/availability/{amount}", "Modifica la quantità disponibile di un prodotto");
+
+        return apiInfo;
+    }
 
 
     @GetMapping("/products")
