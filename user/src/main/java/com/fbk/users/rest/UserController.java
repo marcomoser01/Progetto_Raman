@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @GetMapping("/api/info")
+    @GetMapping("/info")
     public String apiInfo() {
         JSONObject apiInfo = new JSONObject();
 

@@ -18,7 +18,7 @@ public class RatingController {
     @Autowired
     private RatingService service;
 
-    @GetMapping("/api/info")
+    @GetMapping("/info")
     public String apiInfo() {
         JSONObject apiInfo = new JSONObject();
 

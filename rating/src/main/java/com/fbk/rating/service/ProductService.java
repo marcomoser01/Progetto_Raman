@@ -14,7 +14,7 @@ import com.fbk.rating.domain.Product;
 @Service
 public class ProductService {
 
-	private String endpoint = "http://localhost:8080";
+    private String endpoint = "http://gateway:9999/catalog";
 
 	private RestTemplate restTemplate = new RestTemplate();
 

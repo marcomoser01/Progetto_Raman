@@ -25,7 +25,7 @@ public class PurchaseController {
 	@Autowired
 	private PurchaseService service;
 
-	@GetMapping("/api/info")
+	@GetMapping("/info")
     public String apiInfo() {
         JSONObject apiInfo = new JSONObject();
 
