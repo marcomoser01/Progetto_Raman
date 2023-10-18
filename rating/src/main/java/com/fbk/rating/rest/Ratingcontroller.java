@@ -1,9 +1,7 @@
 package com.fbk.rating.rest;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,22 +13,22 @@ import com.fbk.rating.service.RatingService;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
-public class Ratingcontroller {
+public class RatingController {
 
     @Autowired
     private RatingService service;
 
     @GetMapping("/api/info")
-    public Map<String, String> apiInfo() {
-        Map<String, String> info = new HashMap<>();
+    public String apiInfo() {
+        JSONObject apiInfo = new JSONObject();
 
-        info.put("GET /rating/{id}", "Restituisce le valutazioni per un utente specifico.");
-        info.put("POST /ratings/{productId}/{userId}",
+        apiInfo.put("GET /rating/{id}", "Restituisce le valutazioni per un utente specifico.");
+        apiInfo.put("POST /ratings/{productId}/{userId}",
                 "Aggiunge una valutazione per un prodotto specifico da parte di un utente.");
-        info.put("GET /ratings/{productId}", "Restituisce le valutazioni per un prodotto specifico.");
-        info.put("GET /popular", "Restituisce i prodotti popolari basati sulle valutazioni.");
+        apiInfo.put("GET /ratings/{productId}", "Restituisce le valutazioni per un prodotto specifico.");
+        apiInfo.put("GET /popular", "Restituisce i prodotti popolari basati sulle valutazioni.");
 
-        return info;
+        return apiInfo.toString();
     }
 
     @GetMapping("/rating/{id}")

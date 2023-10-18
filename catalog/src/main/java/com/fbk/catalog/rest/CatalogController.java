@@ -1,9 +1,7 @@
 package com.fbk.catalog.rest;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,8 +19,8 @@ public class CatalogController {
     private ProductService service;
 
     @GetMapping("/info")
-    public Map<String, String> apiInfo() {
-        Map<String, String> apiInfo = new HashMap<>();
+    public String apiInfo() {
+        JSONObject apiInfo = new JSONObject();
         
         apiInfo.put("GET /api/products", "Ottieni l'elenco dei prodotti disponibili");
         apiInfo.put("GET /api/product/{id}", "Ottieni un prodotto specifico per ID");
@@ -31,7 +29,7 @@ public class CatalogController {
         apiInfo.put("POST /api/addProducts", "Aggiungi una lista di prodotti");
         apiInfo.put("PUT /api/products/{id}/availability/{amount}", "Modifica la quantità disponibile di un prodotto");
 
-        return apiInfo;
+        return apiInfo.toString();
     }
 
 

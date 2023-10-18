@@ -1,8 +1,6 @@
 package com.fbk.purchase.rest;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,14 +26,14 @@ public class PurchaseController {
 	private PurchaseService service;
 
 	@GetMapping("/api/info")
-	public Map<String, String> apiInfo() {
-		Map<String, String> info = new HashMap<>();
+    public String apiInfo() {
+        JSONObject apiInfo = new JSONObject();
 
-		info.put("GET /purchases/{userId}", "Restituisce gli acquisti dell'utente specificato.");
-		info.put("GET /purchases/purchase/{purchaseId}", "Restituisce un acquisto specifico.");
-		info.put("POST /purchases/{userId}", "Effettua un acquisto per l'utente specificato.");
+		apiInfo.put("GET /purchases/{userId}", "Restituisce gli acquisti dell'utente specificato.");
+		apiInfo.put("GET /purchases/purchase/{purchaseId}", "Restituisce un acquisto specifico.");
+		apiInfo.put("POST /purchases/{userId}", "Effettua un acquisto per l'utente specificato.");
 
-		return info;
+		return apiInfo.toString();
 	}
 
 	@GetMapping("/purchases/{userId}")
