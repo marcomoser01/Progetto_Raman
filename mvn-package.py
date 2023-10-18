@@ -30,7 +30,7 @@ def esegui_comando(directory, comando):
 
 def compila_progetti(mavenProjects, comando):
     # Crea un ThreadPoolExecutor per eseguire comandi in parallelo
-    with ThreadPoolExecutor(max_workers=len(mavenProjects)) as executor:
+    with ThreadPoolExecutor(max_workers=3) as executor:
         # Esegui il comando in parallelo per ciascun progetto
         for project in mavenProjects:
             executor.submit(esegui_comando, project, comando)
