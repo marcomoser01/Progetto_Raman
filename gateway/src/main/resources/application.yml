@@ -14,6 +14,7 @@ eureka:
 spring:
   application:
     name: gateway
+
   cloud:
     gateway:
       routes:
@@ -23,18 +24,21 @@ spring:
             - Path=/catalog/**
           filters:
             - StripPrefix=1
+
         - id: users
           uri: lb://USERS
           predicates:
             - Path=/users/**
           filters:
             - StripPrefix=1
+
         - id: rating
           uri: lb://RATING
           predicates:
             - Path=/rating/**
           filters:
             - StripPrefix=1
+            
         - id: purchase
           uri: lb://PURCHASE
           predicates:
