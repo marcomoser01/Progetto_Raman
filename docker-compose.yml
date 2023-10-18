@@ -48,25 +48,6 @@ services:
       - my_network
     restart: on-failure
 
-  catalog:
-    container_name: catalog
-    build:
-      context: ./catalog
-      dockerfile: Dockerfile
-    depends_on:
-      - config-server
-      - zipkin
-      - registry
-    ports:
-      - 8080:8080
-    networks:
-      - my_network
-    links:
-      - config-server
-      - registry
-      - zipkin
-    restart: on-failure
-
   gateway:
     container_name: gateway
     build:
@@ -78,6 +59,25 @@ services:
       - registry
     ports:
       - 9999:9999
+    networks:
+      - my_network
+    links:
+      - config-server
+      - registry
+      - zipkin
+    restart: on-failure
+
+  catalog:
+    container_name: catalog
+    build:
+      context: ./catalog
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - zipkin
+      - registry
+    ports:
+      - 8080:8080
     networks:
       - my_network
     links:
