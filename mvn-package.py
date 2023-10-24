@@ -11,9 +11,12 @@ def esegui_comando(directory, comando):
     try:
         # Cambia la directory corrente alla directory del progetto
         os.chdir(directory)
-
-        # Esegui il comando nella directory del progetto e cattura l'output
-        result = subprocess.run(comando, shell=True, capture_output=True, text=True)
+        try:
+            print(f'Sto compilando la cartella: {directory}...')
+            # Esegui il comando nella directory del progetto e cattura l'output
+            result = subprocess.run(comando, shell=True, capture_output=True, text=True)
+        except Exception as e:
+            print('\n\nErrore compilando la cartella\n\n{e}')
 
         if result.returncode == 0:
             # Comando eseguito con successo
