@@ -26,7 +26,7 @@ public class PurchaseController {
 	private PurchaseService service;
 
 	@GetMapping("/info")
-    public String apiInfo() {
+        public String apiInfo() {
         JSONObject apiInfo = new JSONObject();
 
 		apiInfo.put("GET /purchases/{userId}", "Restituisce gli acquisti dell'utente specificato.");
