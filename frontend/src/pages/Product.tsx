@@ -23,10 +23,15 @@ export default function Product() {
 
 	// retrieve ratings of specific product
 	useEffect(() => {
-		if (product && typeof product === 'object') {
+		if (product && typeof product === 'object' && product.id >= 0) {
+			console.log(product)
 			fetchRatings(product.id).then(data => {
+				console.log(data)
 				setRatings(data)
 			})
+		} else {
+			console.error('Failed rating fetch. product object isn\'t perfect')
+			console.log(product)
 		}
 	}, [product])
 

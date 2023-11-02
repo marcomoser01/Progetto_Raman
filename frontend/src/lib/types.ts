@@ -8,8 +8,9 @@ export interface Product {
   title: string
 }
 
-export interface ProductWithAVGVote extends Product {
+export interface ProductWithAVGVote {
   avgVote: number
+  product: Product
 }
 
 export interface RatingType {

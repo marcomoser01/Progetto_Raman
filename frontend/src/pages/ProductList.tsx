@@ -19,6 +19,7 @@ export default function ProductList() {
 
 	useEffect(() => {
 		fetchPopularProducts().then(data => {
+			console.log(data)
 			setPopularProducts(data)
 		})
 		//fetch all ratings I guess. so that i can put them in the table.
@@ -26,11 +27,13 @@ export default function ProductList() {
 
 	return (
 		<main className="max-w-2xl mx-auto my-4 px-2 py-4">
-			<Typography variant="h1">Popular Products List</Typography>
-			<br />
-			<Button asChild>
-				<Link to="/addProduct">Add Product</Link>
-			</Button>
+			<div className='flex flex-row justify-between items-end'>
+				<Typography variant="h1">Popular Products List</Typography>
+
+				<Button asChild>
+					<Link to="/addProduct">Add Product</Link>
+				</Button>
+			</div>
 			{/* table */}
 			<div
 				className={cn('my-6 w-full overflow-y-auto', {
@@ -61,30 +64,33 @@ export default function ProductList() {
 						{popularProducts &&
 							popularProducts
 								// .sort((a, b) => b.vote - a.vote) //descending order
-								.map((product, index) => (
-									<tr
-										className="m-0 border-t p-0 even:bg-gray-100 cursor-pointer hover:bg-slate-900/10 "
-										tabIndex={0}
-										key={index}
-										onClick={() => openProduct(product)}
-										onKeyDown={e =>
-											e.key === 'Enter' ? openProduct(product) : ''
-										}
-									>
-										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{product.id || -1}
-										</td>
-										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{product.title || 'prodotto'}
-										</td>
-										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{product.price || 0}€
-										</td>
-										<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-											{product.avgVote || 0}
-										</td>
-									</tr>
-								))}
+								.map((product, index) => {
+									const productItem: Product = product?.product
+									return (
+										<tr
+											className="m-0 border-t p-0 even:bg-gray-100 cursor-pointer hover:bg-slate-900/10 "
+											tabIndex={0}
+											key={index}
+											onClick={() => openProduct(productItem)}
+											onKeyDown={e =>
+												e.key === 'Enter' ? openProduct(productItem) : ''
+											}
+										>
+											<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+												{productItem.id || -1}
+											</td>
+											<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+												{productItem.title || 'FETCH FAILED'}
+											</td>
+											<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+												{productItem.price || 0}€
+											</td>
+											<td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+												{product.avgVote || 0}
+											</td>
+										</tr>
+									)
+								})}
 					</tbody>
 				</table>
 			</div>
