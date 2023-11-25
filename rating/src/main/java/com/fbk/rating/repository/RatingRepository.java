@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.fbk.rating.domain.Rating;
 
 
-public interface RatingRepository extends JpaRepository<Rating, String> {
+public interface RatingRepository extends JpaRepository<Rating, Integer> {
 
 	Optional<Rating> findById(Integer id);
 	List<Rating> findByUserId(Integer userId);

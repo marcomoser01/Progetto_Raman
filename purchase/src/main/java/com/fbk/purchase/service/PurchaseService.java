@@ -20,11 +20,11 @@ public class PurchaseService {
 	private ProductService productService;
 	
 	public Page<Purchase> getUserPurchases(String userId, Pageable pageRequest) {
-		return repo.findByUserId(userId, pageRequest);
+		return repo.findByUserId(Integer.parseInt(userId), pageRequest);
 	}
 	
 	public Purchase getUserPurchase(String purchaseId) {
-		return repo.findById(purchaseId).orElse(null);
+		return repo.findById(Integer.parseInt(purchaseId)).orElse(null);
 	}
 	
 	public Purchase buy(String userId, PurchaseRequest request) {
