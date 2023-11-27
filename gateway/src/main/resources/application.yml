@@ -1,9 +1,14 @@
+server:
+  port: 9999
+
 eureka:
   client:
     serviceUrl:
       defaultZone: http://registry:8761/eureka/
 
 spring:
+  application:
+    name: gateway
   cloud:
     gateway:
       routes:
@@ -27,10 +32,11 @@ spring:
             - Path=/rating/**
           filters:
             - StripPrefix=1
-            
+
         - id: purchase
           uri: lb://PURCHASE
           predicates:
             - Path=/purchase/**
           filters:
             - StripPrefix=1
+
