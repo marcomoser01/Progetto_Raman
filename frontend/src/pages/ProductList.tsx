@@ -12,9 +12,9 @@ import { fetchPopularProducts } from '@/lib/fetch'
 export default function ProductList() {
 	const [popularProducts, setPopularProducts] = useState<ProductWithAVGVote[]>()
 
-	function openProduct(product: ProductWithAVGVote) {
+	function openProduct(product: Product) {
 		// localStorage.setItem('product', JSON.stringify(product))
-		localStorage.setItem('product', JSON.stringify(product.product))
+		localStorage.setItem('product', JSON.stringify(product))
 		location.assign('/Product') //got to that product page
 	}
 

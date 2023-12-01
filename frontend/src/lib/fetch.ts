@@ -4,12 +4,13 @@ import { Product, ProductWithAVGVote, RatingInterface, User } from "@/lib/types"
 
 type CreatedProduct = Omit<Product, "id">;
 
-const RATING_URL = import.meta.env.VITE_RATING_URL
-const CATALOG_URL = import.meta.env.VITE_CATALOG_URL
-const USERS_URL = import.meta.env.VITE_USERS_URL
+const RATING_URL: string = import.meta.env.VITE_RATING_URL
+const CATALOG_URL: string = import.meta.env.VITE_CATALOG_URL
+const USERS_URL: string = import.meta.env.VITE_USERS_URL
 
 //returns a single rating for a specified product
 export async function fetchRatings(productId: number) {
+  console.log('fetch ratings')
   const response = await fetch(RATING_URL + `/ratings/${productId}`, {
     mode: 'cors',
   })
@@ -19,17 +20,19 @@ export async function fetchRatings(productId: number) {
   }
 
   const responseObj = await response.json()
-  if (Object.keys(responseObj).length === 0) {
+  console.log(responseObj)
+  if (!Array.isArray(responseObj) && Object.keys(responseObj).length === 0) {
     return
   }
   // console.log(responseObj)
   // console.log(responseObj.content)
 
-  return responseObj || undefined
+  return responseObj
 }
 
 //returns an array of products
 export async function fetchPopularProducts(): Promise<ProductWithAVGVote[] | undefined> {
+  console.log('fetch popular products')
   const response = await fetch(RATING_URL + `/popular`, {
     mode: 'cors',
   })
@@ -50,6 +53,7 @@ export async function fetchPopularProducts(): Promise<ProductWithAVGVote[] | und
 
 //returns the rating created
 export async function fetchAddRatingToProduct(productId: number, userId: number, vote: number, message: string): Promise<RatingInterface | undefined> {
+  console.log('adding rating')
   //
   const response = await fetch(RATING_URL + `/ratings/${productId}/${userId}`, {
     method: 'POST',
@@ -68,7 +72,11 @@ export async function fetchAddRatingToProduct(productId: number, userId: number,
     return
   }
 
+  console.log(response.body);
+
   const responseObj = await response.json()
+  console.log(responseObj);
+
   if (Object.keys(responseObj).length === 0) {
     return
   }
@@ -78,7 +86,7 @@ export async function fetchAddRatingToProduct(productId: number, userId: number,
 
 //returns the product created
 export async function fetchAddProduct(product: CreatedProduct): Promise<Product | undefined> {
-  //
+  console.log('adding product')
   const response = await fetch(CATALOG_URL + `/addProduct`, {
     method: 'POST',
     mode: 'cors',
@@ -108,6 +116,7 @@ export async function fetchAddProduct(product: CreatedProduct): Promise<Product 
 
 //returns a user given the id
 export async function fetchUser(id: number): Promise<User | undefined> {
+  console.log('fetch user')
   const response = await fetch(USERS_URL + `/user/${id}`, {
     mode: 'cors',
   })

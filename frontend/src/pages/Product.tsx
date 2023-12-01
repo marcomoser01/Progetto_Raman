@@ -29,7 +29,7 @@ export default function Product() {
 				console.log(data)
 				setRatings(data)
 			})
-		} else {
+		} else if (product) {
 			console.error('Failed rating fetch. product object isn\'t perfect')
 			console.log(product)
 		}
