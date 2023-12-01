@@ -9,14 +9,13 @@ import com.fbk.purchase.domain.Product;
 @Service
 public class ProductService {
 
-	private String endpoint = "http://localhost:8080";
+	private String endpoint = "http://gateway:9999/catalog";
 	
 	private RestTemplate restTemplate = new RestTemplate();
 	
 	public Product getProduct(String productId) {
 		String api = endpoint + "/api/product/" + productId;
 		return restTemplate.getForObject(api, Product.class);
-		// return restTemplate.getForObject(endpoint + "/api/product/{productId}", Product.class, productId);
 	}
 	
 	public Product bookAvailability(String productId, int quantity) {

@@ -1,0 +1,151 @@
+version: "3"
+
+networks:
+  my_network:
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Root
+    ports:
+      - 3306:3306
+    networks:
+      - my_network
+
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin
+    ports:
+      - 9411:9411
+    networks:
+      - my_network
+
+  config-server:
+    container_name: config-server
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    ports:
+      - 8888:8888
+    networks:
+      - my_network
+    restart: on-failure
+
+  registry:
+    container_name: registry
+    build:
+      context: ./registry
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    ports:
+      - 8761:8761
+    networks:
+      - my_network
+    restart: on-failure
+
+  gateway:
+    container_name: gateway
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - zipkin
+      - registry
+    ports:
+      - 9999:9999
+    networks:
+      - my_network
+    links:
+      - config-server
+      - registry
+      - zipkin
+    restart: on-failure
+
+  catalog:
+    container_name: catalog
+    build:
+      context: ./catalog
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - zipkin
+      - registry
+    ports:
+      - 8080:8080
+    networks:
+      - my_network
+    links:
+      - config-server
+      - registry
+      - zipkin
+    restart: on-failure
+
+  purchase:
+    container_name: purchase
+    build:
+      context: ./purchase
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - zipkin
+      - registry
+      - catalog
+    ports:
+      - 8090:8090
+    networks:
+      - my_network
+    links:
+      - config-server
+      - registry
+      - zipkin
+      - catalog
+    restart: on-failure
+
+  rating:
+    container_name: rating
+    build:
+      context: ./rating
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - zipkin
+      - registry
+      - catalog
+      - user
+    ports:
+      - 8060:8060
+    networks:
+      - my_network
+    links:
+      - config-server
+      - registry
+      - zipkin
+      - user
+    restart: on-failure
+
+  user:
+    container_name: user
+    build:
+      context: ./user
+      dockerfile: Dockerfile
+    depends_on:
+      - config-server
+      - zipkin
+      - registry
+      - catalog
+    ports:
+      - 8070:8070
+    networks:
+      - my_network
+    links:
+      - config-server
+      - registry
+      - zipkin
+      - catalog
+    restart: on-failure

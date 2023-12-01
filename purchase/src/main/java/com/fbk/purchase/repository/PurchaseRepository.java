@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.fbk.purchase.domain.Purchase;
 
-public interface PurchaseRepository extends JpaRepository<Purchase, String> {
+public interface PurchaseRepository extends JpaRepository<Purchase, Integer> {
 
-	Page<Purchase> findByUserId(String userId, Pageable pageRequest);
+	Page<Purchase> findByUserId(Integer userId, Pageable pageRequest);
 }

@@ -9,11 +9,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.fbk.catalog.domain.Product;
 
 
-public interface ProductRepository extends JpaRepository<Product, String>{
+public interface ProductRepository extends JpaRepository<Product, Integer>{
 
     Page<Product> findByCategory(String category, Pageable page);
     
-    Optional<Product> findById(String id);
+    Optional<Product> findById(Integer id);
 
 
 }

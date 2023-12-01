@@ -7,7 +7,7 @@ import com.fbk.rating.domain.User;
 
 @Service
 public class UserService {
-    private String endpoint = "http://localhost:8070";
+    private String endpoint = "http://gateway:9999/users";
 	
 	private RestTemplate restTemplate = new RestTemplate();
 	

@@ -33,7 +33,7 @@ public class ProductService {
     }
 
     public Product getProduct(String id) {
-        return repo.findById(id).orElse(null);
+        return repo.findById(Integer.parseInt(id)).orElse(null);
     }
 
     public Page<Product> findProducts(String category, Pageable page) {
