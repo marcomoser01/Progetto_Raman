@@ -24,6 +24,7 @@ import { fetchAddRatingToProduct } from '@/lib/fetch'
 import { toast } from '@/components/ui/use-toast'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { ArrowLeftIcon, HomeIcon, RocketIcon } from '@radix-ui/react-icons'
 
 const FormSchema = z.object({
 	userId: z.coerce.number().int().min(1, {
@@ -146,14 +147,16 @@ export default function AddRating() {
 							)}
 						/>
 						<div className="flex justify-between">
-							<Button type="submit">Submit 🚀</Button>
-							<Button
-								type="button"
-								asChild
-								className={cn({ hidden: !submitted })}
-							>
-								<Link to="/Product">Back to Product ⏪</Link>
-							</Button>
+							<Button type="submit"><RocketIcon className="mr-2 h-4 w-4" />Submit</Button>
+							<Link to="/Product">
+								<Button
+									type="button"
+									className={cn({ hidden: !submitted })}
+								>
+									<ArrowLeftIcon className="mr-2 h-4 w-4" />
+									Back to Product
+								</Button>
+							</Link>
 						</div>
 					</form>
 				</Form>
@@ -163,10 +166,13 @@ export default function AddRating() {
 		return (
 			<main className="w-fit mx-auto px-2 py-4">
 				<Typography variant="h1">No product detected (#`-_ゝ-)</Typography>
-				<Button asChild className="mt-4">
-					<Link to="/list">Back Home 🏠</Link>
-				</Button>
-			</main>
+				<Link to="/list">
+					<Button className="mt-4">
+						<HomeIcon className="mr-2 h-4 w-4" />
+						Back Home
+					</Button>
+				</Link>
+			</main >
 		)
 	}
 }

@@ -63,7 +63,7 @@ export default function Rating({
 				{/* </div> */}
 			</CardHeader>
 			<CardContent>
-				<pre className="font-sans">{message}</pre>
+				<pre className="font-sans whitespace-pre-wrap">{message}</pre>
 			</CardContent>
 		</Card>
 	)

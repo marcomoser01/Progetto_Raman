@@ -9,7 +9,8 @@ import Rating from '@/components/Rating'
 import { Separator } from '@/components/ui/separator'
 import Typography from '@/components/Typography'
 import { fetchRatings } from '@/lib/fetch'
-import { Product, RatingInterface, RatingObj } from '@/lib/types'
+import { Product, RatingObj } from '@/lib/types'
+import { ArrowLeftIcon, PlusIcon } from '@radix-ui/react-icons'
 
 export default function Product() {
 	const [ratings, setRatings] = useState<RatingObj[]>()
@@ -40,9 +41,12 @@ export default function Product() {
 			<main className="max-w-3xl mx-auto my-4 px-2 py-4">
 				<div className="flex justify-between items-baseline">
 					<Typography variant="h1">{product.title}</Typography>
-					<Button asChild>
-						<Link to="/">Back to Product List</Link>
-					</Button>
+					<Link to="/">
+						<Button>
+							<ArrowLeftIcon className="mr-2 h-4 w-4" />
+							Back to Product List
+						</Button>
+					</Link>
 				</div>
 				<Typography variant="p">
 					Description:{' '}
@@ -62,9 +66,12 @@ export default function Product() {
 
 				<div className="flex justify-between items-baseline">
 					<Typography variant="h2">Ratings</Typography>
-					<Button className="mb-8" asChild>
-						<Link to="/addRating">Add Rating</Link>
-					</Button>
+					<Link to="/addRating">
+						<Button className="mb-8" >
+							<PlusIcon className="mr-2 h-4 w-4" />
+							Add Rating
+						</Button>
+					</Link>
 				</div>
 
 				{ratings &&

@@ -22,6 +22,7 @@ import { toast } from '@/components/ui/use-toast'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { ArrowLeftIcon, RocketIcon } from '@radix-ui/react-icons'
 
 const FormSchema = z.object({
 	title: z.string().min(2, {
@@ -175,14 +176,18 @@ export default function AddPRoduct() {
 						)}
 					/>
 					<div className="flex justify-between">
-						<Button type="submit">Submit 🚀</Button>
-						<Button
-							type="button"
-							asChild
-							className={cn({ hidden: !submitted })}
-						>
-							<Link to="/">Back to Product List ⏪</Link>
+						<Button type="submit">
+							<RocketIcon className="mr-2 h-4 w-4" />Submit
 						</Button>
+						<Link to="/">
+							<Button
+								type="button"
+								className={cn({ hidden: !submitted })}
+							>
+								<ArrowLeftIcon className="mr-2 h-4 w-4" />
+								Back to Product List
+							</Button>
+						</Link>
 					</div>
 				</form>
 			</Form>

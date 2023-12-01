@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import Typography from '@/components/Typography'
 import { cn } from '@/lib/utils'
 import { fetchPopularProducts } from '@/lib/fetch'
+import { PlusCircledIcon } from '@radix-ui/react-icons'
 
 export default function ProductList() {
 	const [popularProducts, setPopularProducts] = useState<ProductWithAVGVote[]>()
@@ -30,9 +31,12 @@ export default function ProductList() {
 			<div className='flex flex-row justify-between items-end'>
 				<Typography variant="h1">Popular Products List</Typography>
 
-				<Button asChild>
-					<Link to="/addProduct">Add Product</Link>
-				</Button>
+				<Link to="/addProduct">
+					<Button>
+						<PlusCircledIcon className="mr-2 h-4 w-4" />
+						Add Product
+					</Button>
+				</Link>
 			</div>
 			{/* table */}
 			<div
