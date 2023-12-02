@@ -66,13 +66,10 @@ export async function fetchAddRatingToProduct(productId: number, userId: number,
       "Content-Type": "application/json",
     },
   })
-  console.log(response)
   if (!response.ok) {
     console.warn(response.status + response.statusText)
     return
   }
-
-  console.log(response.body);
 
   const responseObj = await response.json()
   console.log(responseObj);
@@ -128,6 +125,53 @@ export async function fetchUser(id: number): Promise<User | undefined> {
 
   const responseObj = await response.json()
   console.log(responseObj)
+  if (Object.keys(responseObj).length === 0) {
+    return
+  }
+
+  return responseObj || undefined
+}
+
+export async function fetchUsers(): Promise<User[] | undefined> {
+  console.log('fetch users list')
+  const response = await fetch(USERS_URL + `/users`, {
+    mode: 'cors',
+  })
+
+  console.log(response)
+  if (!response.ok) {
+    console.warn(response.status + response.statusText)
+    return
+  }
+
+  const responseObj = await response.json()
+  console.log(responseObj)
+  if (Object.keys(responseObj).length === 0) {
+    return
+  }
+
+  return responseObj || undefined
+}
+
+export async function fetchAddUser(user: Omit<User, "id">): Promise<User | undefined> {
+  console.log('adding product')
+  const response = await fetch(USERS_URL + `/addUser`, {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify({
+      name: user.name,
+      cognome: user.cognome,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  if (!response.ok) {
+    console.warn(response.status + response.statusText)
+    return
+  }
+
+  const responseObj = await response.json()
   if (Object.keys(responseObj).length === 0) {
     return
   }

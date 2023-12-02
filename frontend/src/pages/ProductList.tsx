@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Typography from '@/components/Typography'
 import { cn } from '@/lib/utils'
 import { fetchPopularProducts } from '@/lib/fetch'
-import { PlusCircledIcon } from '@radix-ui/react-icons'
+import { AvatarIcon, PlusCircledIcon } from '@radix-ui/react-icons'
 
 export default function ProductList() {
 	const [popularProducts, setPopularProducts] = useState<ProductWithAVGVote[]>()
@@ -28,15 +28,24 @@ export default function ProductList() {
 
 	return (
 		<main className="max-w-2xl mx-auto my-4 px-2 py-4">
-			<div className='flex flex-row justify-between items-end'>
+			<div className='flex flex-row justify-between items-center'>
 				<Typography variant="h1">Popular Products List</Typography>
 
-				<Link to="/addProduct">
-					<Button>
-						<PlusCircledIcon className="mr-2 h-4 w-4" />
-						Add Product
-					</Button>
-				</Link>
+				<div className='flex justify-center gap-2 flex-col'>
+					<Link to="/addProduct">
+						<Button className='w-full justify-start'>
+							<PlusCircledIcon className="mr-2 h-4 w-4" />
+							Add Product
+						</Button>
+					</Link>
+
+					<Link to="/Users">
+						<Button variant="outline" className='w-full justify-start'>
+							<AvatarIcon className="mr-2 h-4 w-4" />
+							See Users
+						</Button>
+					</Link>
+				</div>
 			</div>
 			{/* table */}
 			<div
@@ -67,7 +76,7 @@ export default function ProductList() {
 					<tbody>
 						{popularProducts &&
 							popularProducts
-								// .sort((a, b) => b.vote - a.vote) //descending order
+								.sort((a, b) => b.product.id - a.product.id) //descending order
 								.map((product, index) => {
 									const productItem: Product = product?.product
 									return (

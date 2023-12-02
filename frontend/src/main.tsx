@@ -9,6 +9,7 @@ import ProductList from './pages/ProductList'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Toaster } from '@/components/ui/toaster'
+import UsersList from './pages/UsersList'
 
 const router = createBrowserRouter([
 	{
@@ -19,10 +20,6 @@ const router = createBrowserRouter([
 		path: '/product',
 		element: <Product />,
 	},
-	// {
-	// 	path: '/list',
-	// 	element: <ProductList />,
-	// },
 	{
 		path: '/addProduct',
 		element: <AddProduct />,
@@ -30,6 +27,10 @@ const router = createBrowserRouter([
 	{
 		path: '/addRating',
 		element: <AddRating />,
+	},
+	{
+		path: '/Users',
+		element: <UsersList />,
 	},
 ])
 
