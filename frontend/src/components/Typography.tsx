@@ -2,16 +2,17 @@ import { FunctionComponent, ReactNode } from 'react'
 
 interface Props {
 	children: ReactNode
+	styles?: string
 	variant?: string
 }
 
-const Typography: FunctionComponent<Props> = ({ children, variant }) => {
+const Typography: FunctionComponent<Props> = ({ children, variant, styles }) => {
 	switch (variant) {
 		case 'h1':
 			return (
-				<h1 className="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">
+				<h1 className={"scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl" + " " + styles} >
 					{children}
-				</h1>
+				</h1 >
 			)
 		case 'h2':
 			return (

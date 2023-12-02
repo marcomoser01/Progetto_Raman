@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.fbk.users.domain.User;
 import com.fbk.users.services.UserService;
 
-@RestController()
+@RestController
 @RequestMapping("/api")
 @CrossOrigin
 public class UserController {

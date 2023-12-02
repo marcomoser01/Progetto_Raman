@@ -8,11 +8,13 @@ import { Link } from 'react-router-dom'
 import Typography from '@/components/Typography'
 import { cn } from '@/lib/utils'
 import { fetchPopularProducts } from '@/lib/fetch'
+import { AvatarIcon, PlusCircledIcon } from '@radix-ui/react-icons'
 
 export default function ProductList() {
 	const [popularProducts, setPopularProducts] = useState<ProductWithAVGVote[]>()
 
 	function openProduct(product: Product) {
+		// localStorage.setItem('product', JSON.stringify(product))
 		localStorage.setItem('product', JSON.stringify(product))
 		location.assign('/Product') //got to that product page
 	}
@@ -22,17 +24,28 @@ export default function ProductList() {
 			console.log(data)
 			setPopularProducts(data)
 		})
-		//fetch all ratings I guess. so that i can put them in the table.
 	}, [])
 
 	return (
 		<main className="max-w-2xl mx-auto my-4 px-2 py-4">
-			<div className='flex flex-row justify-between items-end'>
+			<div className='flex flex-row justify-between items-center'>
 				<Typography variant="h1">Popular Products List</Typography>
 
-				<Button asChild>
-					<Link to="/addProduct">Add Product</Link>
-				</Button>
+				<div className='flex justify-center gap-2 flex-col'>
+					<Link to="/addProduct">
+						<Button className='w-full justify-start'>
+							<PlusCircledIcon className="mr-2 h-4 w-4" />
+							Add Product
+						</Button>
+					</Link>
+
+					<Link to="/Users">
+						<Button variant="outline" className='w-full justify-start'>
+							<AvatarIcon className="mr-2 h-4 w-4" />
+							See Users
+						</Button>
+					</Link>
+				</div>
 			</div>
 			{/* table */}
 			<div
@@ -45,10 +58,10 @@ export default function ProductList() {
 					<thead>
 						<tr className="m-0 border-t p-0 even:bg-muted">
 							<th className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
-								Product ID
+								ID
 							</th>
 							<th className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
-								Product Title
+								Product
 							</th>
 							<th className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
 								Price
@@ -63,7 +76,7 @@ export default function ProductList() {
 					<tbody>
 						{popularProducts &&
 							popularProducts
-								// .sort((a, b) => b.vote - a.vote) //descending order
+								.sort((a, b) => b.product.id - a.product.id) //descending order
 								.map((product, index) => {
 									const productItem: Product = product?.product
 									return (

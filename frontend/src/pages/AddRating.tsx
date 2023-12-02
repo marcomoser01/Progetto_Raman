@@ -19,10 +19,12 @@ import { Link } from 'react-router-dom'
 import { Product } from '@/lib/types'
 import { Textarea } from '@/components/ui/textarea'
 import Typography from '@/components/Typography'
+import { cn } from '@/lib/utils'
 import { fetchAddRatingToProduct } from '@/lib/fetch'
 import { toast } from '@/components/ui/use-toast'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { ArrowLeftIcon, HomeIcon, ReloadIcon, RocketIcon } from '@radix-ui/react-icons'
 
 const FormSchema = z.object({
 	userId: z.coerce.number().int().min(1, {
@@ -37,7 +39,9 @@ const FormSchema = z.object({
 })
 
 export default function AddRating() {
+	const [loading, setLoading] = useState<boolean>(false)
 	const [product, setProduct] = useState<Product>()
+	const [submitted, setSubmitted] = useState<boolean>(false)
 
 	useEffect(() => {
 		setProduct(() => JSON.parse(localStorage.getItem('product') || ''))
@@ -48,16 +52,22 @@ export default function AddRating() {
 	})
 
 	async function onSubmit(data: z.infer<typeof FormSchema>) {
+		setLoading(true)
 		let result = undefined
 		if (product) {
+
 			result = await fetchAddRatingToProduct(
 				product.id,
 				data.userId,
 				data.vote,
 				data.message
-			)
+			);
+
 			if (result && Object.keys(result).length !== 0) {
 				toast({
+					className: cn(
+						'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4'
+					),
 					title: 'You submitted the following values:',
 					description: (
 						<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-2">
@@ -67,9 +77,7 @@ export default function AddRating() {
 						</pre>
 					),
 				})
-				setTimeout(() => {
-					location.assign('/product')
-				}, 2000)
+				setSubmitted(true)
 			}
 			console.log(data)
 			console.log(result)
@@ -80,13 +88,13 @@ export default function AddRating() {
 				description: <p>⊙﹏⊙∥ Either a fetch error or logic one. Don't know</p>,
 			})
 		}
+		setLoading(false)
 	}
 
 	if (product && Object.keys(product).length !== 0) {
 		return (
 			<main className="w-fit mx-auto px-2 py-4">
-				<Typography variant="h1">Add Your Rating</Typography>
-				<br />
+				<Typography variant="h1" styles='mb-8'>Add Your Rating</Typography>
 
 				<Form {...form}>
 					<form
@@ -142,7 +150,24 @@ export default function AddRating() {
 								</FormItem>
 							)}
 						/>
-						<Button type="submit">Submit 🚀</Button>
+						<div className="flex justify-between">
+							<Button type="submit" disabled={loading}>
+								{loading ?
+									<ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> :
+									<RocketIcon className="mr-2 h-4 w-4" />}
+								Submit
+							</Button>
+
+							<Link to="/Product">
+								<Button
+									type="button"
+									className={cn({ hidden: !submitted })}
+								>
+									<ArrowLeftIcon className="mr-2 h-4 w-4" />
+									Back to Product
+								</Button>
+							</Link>
+						</div>
 					</form>
 				</Form>
 			</main>
@@ -151,10 +176,13 @@ export default function AddRating() {
 		return (
 			<main className="w-fit mx-auto px-2 py-4">
 				<Typography variant="h1">No product detected (#`-_ゝ-)</Typography>
-				<Button asChild className="mt-4">
-					<Link to="/list">Back Home 🏠</Link>
-				</Button>
-			</main>
+				<Link to="/list">
+					<Button className="mt-4">
+						<HomeIcon className="mr-2 h-4 w-4" />
+						Back Home
+					</Button>
+				</Link>
+			</main >
 		)
 	}
 }

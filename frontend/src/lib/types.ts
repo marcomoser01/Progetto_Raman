@@ -13,7 +13,11 @@ export interface ProductWithAVGVote {
   product: Product
 }
 
-export interface RatingType {
+export interface RatingObj {
+  rating: RatingInterface
+}
+
+export interface RatingInterface {
   id: number
   vote: number
   message: string
@@ -24,4 +28,5 @@ export interface RatingType {
 export interface User {
   id: number
   name: string
+  cognome: string //(╯°□°）╯︵ ┻━┻
 }

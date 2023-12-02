@@ -11,29 +11,32 @@ import {
 import { StarFilledIcon, StarIcon } from '@radix-ui/react-icons'
 import { useEffect, useState } from 'react'
 
-import { RatingType } from '@/lib/types'
+import { RatingInterface } from '@/lib/types'
 import { fetchUser } from '@/lib/fetch'
 
-export default function Rating(rating: RatingType) {
+export default function Rating({
+	id,
+	message,
+	productId,
+	userId,
+	vote,
+}: RatingInterface) {
 	const [username, setUsername] = useState<string>()
-	//@ts-ignore
-	rating = rating.rating //don't ask
 
 	function throwStarsInTheUniverse() {
 		const stars = [0, 0, 0, 0, 0]
 
-		for (let filledStars = 0; filledStars < rating.vote; filledStars++) {
+		for (let filledStars = 0; filledStars < vote; filledStars++) {
 			stars[filledStars] = 1
 		}
 
-		// console.log(`Stars: ${rating.vote}/5 - ${stars}`)
 		return stars
 	}
 
 	useEffect(() => {
-		fetchUser(rating.userId).then(user => {
+		fetchUser(userId).then(user => {
 			if (user) {
-				setUsername(user.name)
+				setUsername(user.name + ' ' + user.cognome)
 			} else {
 				setUsername('<No username detected>')
 			}
@@ -48,11 +51,11 @@ export default function Rating(rating: RatingType) {
 				<CardTitle>{username}</CardTitle>
 				<CardDescription className="font-mono leading-none">
 					<div className="flex">
-						{throwStarsInTheUniverse().map(starBool =>
+						{throwStarsInTheUniverse().map((starBool, i) =>
 							starBool ? (
-								<StarFilledIcon className="[&>path]:fill-slate-950" />
+								<StarFilledIcon key={i} className="[&>path]:fill-slate-950" />
 							) : (
-								<StarIcon />
+								<StarIcon key={i} />
 							)
 						)}
 					</div>
@@ -60,7 +63,7 @@ export default function Rating(rating: RatingType) {
 				{/* </div> */}
 			</CardHeader>
 			<CardContent>
-				<pre className="font-sans">{rating.message}</pre>
+				<pre className="font-sans whitespace-pre-wrap">{message}</pre>
 			</CardContent>
 		</Card>
 	)

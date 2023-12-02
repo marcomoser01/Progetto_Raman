@@ -36,6 +36,7 @@ public class RatingController {
         return service.getRatingsByUser(id);
     }
 
+    @CrossOrigin
     @PostMapping("/ratings/{productId}/{userId}")
     public Rating addRating(@RequestBody RatingRequest rating, @PathVariable String productId,
             @PathVariable String userId) {
