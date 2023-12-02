@@ -22,7 +22,7 @@ import { toast } from '@/components/ui/use-toast'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ArrowLeftIcon, RocketIcon } from '@radix-ui/react-icons'
+import { ArrowLeftIcon, ReloadIcon, RocketIcon } from '@radix-ui/react-icons'
 
 const FormSchema = z.object({
 	title: z.string().min(2, {
@@ -54,6 +54,7 @@ const FormSchema = z.object({
 })
 
 export default function AddPRoduct() {
+	const [loading, setLoading] = useState<boolean>(false)
 	const [submitted, setSubmitted] = useState<boolean>(false)
 
 	const form = useForm<z.infer<typeof FormSchema>>({
@@ -61,6 +62,7 @@ export default function AddPRoduct() {
 	})
 
 	async function onSubmit(data: z.infer<typeof FormSchema>) {
+		setLoading(true)
 		const result = await fetchAddProduct(data)
 		if (result && Object.keys(result).length !== 0) {
 			toast({
@@ -86,12 +88,12 @@ export default function AddPRoduct() {
 				description: "⊙﹏⊙∥ Either a fetch error or logic one. Don't know",
 			})
 		}
+		setLoading(false)
 	}
 
 	return (
 		<main className="w-fit mx-auto px-2 py-4">
-			<Typography variant="h1">Add Your Product</Typography>
-			<br />
+			<Typography variant="h1" styles='mb-8'>Add Your Product</Typography>
 
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 w-80">
@@ -176,8 +178,11 @@ export default function AddPRoduct() {
 						)}
 					/>
 					<div className="flex justify-between">
-						<Button type="submit">
-							<RocketIcon className="mr-2 h-4 w-4" />Submit
+						<Button type="submit" disabled={loading}>
+							{loading ?
+								<ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> :
+								<RocketIcon className="mr-2 h-4 w-4" />}
+							Submit
 						</Button>
 						<Link to="/">
 							<Button

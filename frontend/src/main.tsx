@@ -10,6 +10,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Toaster } from '@/components/ui/toaster'
 import UsersList from './pages/UsersList'
+import AddUser from './pages/AddUser'
 
 const router = createBrowserRouter([
 	{
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
 	{
 		path: '/Users',
 		element: <UsersList />,
+	},
+	{
+		path: '/addUser',
+		element: <AddUser />,
 	},
 ])
 

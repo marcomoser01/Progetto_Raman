@@ -154,7 +154,8 @@ export async function fetchUsers(): Promise<User[] | undefined> {
 }
 
 export async function fetchAddUser(user: Omit<User, "id">): Promise<User | undefined> {
-  console.log('adding product')
+
+  console.log('adding user')
   const response = await fetch(USERS_URL + `/addUser`, {
     method: 'POST',
     mode: 'cors',

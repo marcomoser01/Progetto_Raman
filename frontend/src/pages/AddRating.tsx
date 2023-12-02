@@ -24,7 +24,7 @@ import { fetchAddRatingToProduct } from '@/lib/fetch'
 import { toast } from '@/components/ui/use-toast'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ArrowLeftIcon, HomeIcon, RocketIcon } from '@radix-ui/react-icons'
+import { ArrowLeftIcon, HomeIcon, ReloadIcon, RocketIcon } from '@radix-ui/react-icons'
 
 const FormSchema = z.object({
 	userId: z.coerce.number().int().min(1, {
@@ -39,6 +39,7 @@ const FormSchema = z.object({
 })
 
 export default function AddRating() {
+	const [loading, setLoading] = useState<boolean>(false)
 	const [product, setProduct] = useState<Product>()
 	const [submitted, setSubmitted] = useState<boolean>(false)
 
@@ -51,14 +52,17 @@ export default function AddRating() {
 	})
 
 	async function onSubmit(data: z.infer<typeof FormSchema>) {
+		setLoading(true)
 		let result = undefined
 		if (product) {
+
 			result = await fetchAddRatingToProduct(
 				product.id,
 				data.userId,
 				data.vote,
 				data.message
-			)
+			);
+
 			if (result && Object.keys(result).length !== 0) {
 				toast({
 					className: cn(
@@ -84,13 +88,13 @@ export default function AddRating() {
 				description: <p>⊙﹏⊙∥ Either a fetch error or logic one. Don't know</p>,
 			})
 		}
+		setLoading(false)
 	}
 
 	if (product && Object.keys(product).length !== 0) {
 		return (
 			<main className="w-fit mx-auto px-2 py-4">
-				<Typography variant="h1">Add Your Rating</Typography>
-				<br />
+				<Typography variant="h1" styles='mb-8'>Add Your Rating</Typography>
 
 				<Form {...form}>
 					<form
@@ -147,7 +151,13 @@ export default function AddRating() {
 							)}
 						/>
 						<div className="flex justify-between">
-							<Button type="submit"><RocketIcon className="mr-2 h-4 w-4" />Submit</Button>
+							<Button type="submit" disabled={loading}>
+								{loading ?
+									<ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> :
+									<RocketIcon className="mr-2 h-4 w-4" />}
+								Submit
+							</Button>
+
 							<Link to="/Product">
 								<Button
 									type="button"
