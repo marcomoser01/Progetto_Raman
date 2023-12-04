@@ -4,8 +4,10 @@
 2. run
 
 ```shell
-node mavenScript.js
+node mavenScript.mjs
 ```
+
+it's `.mjs`, not `js`
 
 1. (<strong>Alternativamente</strong>)
 
