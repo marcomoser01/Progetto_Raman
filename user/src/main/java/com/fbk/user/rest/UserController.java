@@ -1,12 +1,12 @@
-package com.fbk.users.rest;
+package com.fbk.user.rest;
 
 import java.util.List;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.fbk.users.domain.User;
-import com.fbk.users.services.UserService;
+import com.fbk.user.domain.User;
+import com.fbk.user.services.UserService;
 
 @RestController
 @RequestMapping("/api")

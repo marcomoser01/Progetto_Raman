@@ -4,20 +4,13 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.fbk.purchase.domain.Purchase;
 import com.fbk.purchase.domain.PurchaseRequest;
 import com.fbk.purchase.service.PurchaseService;
 
-@Controller
+@RestController
 @RequestMapping("/api")
 @CrossOrigin
 public class PurchaseController {
@@ -26,15 +19,16 @@ public class PurchaseController {
 	private PurchaseService service;
 
 	@GetMapping("/info")
-        public String apiInfo() {
+    public String apiInfo() {
         JSONObject apiInfo = new JSONObject();
 
-		apiInfo.put("GET /purchases/{userId}", "Restituisce gli acquisti dell'utente specificato.");
-		apiInfo.put("GET /purchases/purchase/{purchaseId}", "Restituisce un acquisto specifico.");
-		apiInfo.put("POST /purchases/{userId}", "Effettua un acquisto per l'utente specificato.");
+        apiInfo.put("GET /users", "Restituisce la lista di tutti gli utenti.");
+        apiInfo.put("GET /user/{id}", "Restituisce un utente specifico in base all'ID.");
+        apiInfo.put("POST /addUser", "Aggiunge un nuovo utente.");
+        apiInfo.put("POST /addUsers", "Aggiunge una lista di nuovi utenti.");
 
-		return apiInfo.toString();
-	}
+        return apiInfo.toString();
+    }
 
 	@GetMapping("/purchases/{userId}")
 	public @ResponseBody Page<Purchase> listPurchases(@PathVariable String userId, Pageable pageRequest) {

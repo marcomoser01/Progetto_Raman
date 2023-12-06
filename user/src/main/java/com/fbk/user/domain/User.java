@@ -1,4 +1,4 @@
-package com.fbk.users.domain;
+package com.fbk.user.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

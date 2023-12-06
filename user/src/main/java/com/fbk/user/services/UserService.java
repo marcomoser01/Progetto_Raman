@@ -1,12 +1,12 @@
-package com.fbk.users.services;
+package com.fbk.user.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fbk.users.domain.User;
-import com.fbk.users.repository.UserRepository;
+import com.fbk.user.domain.User;
+import com.fbk.user.repository.UserRepository;
 
 @Service
 public class UserService {

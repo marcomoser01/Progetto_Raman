@@ -1,10 +1,10 @@
-package com.fbk.users.repository;
+package com.fbk.user.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.fbk.users.domain.User;
+import com.fbk.user.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 

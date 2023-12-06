@@ -13,16 +13,16 @@ spring:
     gateway:
       routes:
         - id: catalog
-          uri: lb://CATALOG
+          uri: lb://CATALOG 
           predicates:
             - Path=/catalog/**
           filters:
             - StripPrefix=1
 
-        - id: users
-          uri: lb://USERS
+        - id: user
+          uri: lb://USER
           predicates:
-            - Path=/users/**
+            - Path=/user/**
           filters:
             - StripPrefix=1
 
