@@ -1,3 +1,6 @@
+finire di commentare rating e user , fare script del esposizione 
+
+
 # Steps to start environment
 
 1. (installare maven)

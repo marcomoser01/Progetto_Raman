@@ -1,8 +1,11 @@
+# Imposta la configurazione remota per l'applicazione tramite Spring Cloud Config Server
 spring:
   config:
+  # URL server configurazione
     import: http://config-server:8888/db-mysql-docker.yml
 
 eureka:
   client:
     serviceUrl:
+    # servizio Eureka in ascolto per la registrazione dei client
       defaultZone: http://registry:8761/eureka/

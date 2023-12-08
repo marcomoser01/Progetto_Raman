@@ -9,15 +9,21 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.GeneratedValue;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "Products")
+
+//Questo codice Java definisce una classe chiamata Product, che sembra essere una rappresentazione di un'entità in un database. 
+// Le annotazioni utilizzate nel codice sono tipicamente associate a Java Persistence API (JPA), una specifica Java per la gestione 
+// dei dati relazionali nelle applicazioni Java.
+@Entity //Questa annotazione indica che la classe è un'entità JPA, classe mappata a un DB 
+@AllArgsConstructor//crea un costruttore che accetta tutti i campi come parametri.
+@NoArgsConstructor//genera un costruttore senza argomenti per la classe.
+@Table(name = "Products")//Specifica il nome della tabella del database
+
+// Questo codice Java definisce una classe chiamata Product, che è una rappresentazione di un'entità in un database
 public class Product {
-    @Id
-    @GeneratedValue
+    @Id//PK
+    @GeneratedValue//generato automaticamente
     private Integer id;
-    @NotNull
+    @NotNull//campi no null
     private String title;
     private String category;
     private String description;
@@ -25,6 +31,7 @@ public class Product {
     private Double price;
     private Integer quantity;
     
+    //getter e setter per modificare o ricevere 
     public Integer getId() {
         return id;
     }

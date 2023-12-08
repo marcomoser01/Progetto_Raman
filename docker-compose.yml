@@ -1,38 +1,50 @@
 version: "3"
+# file di configurazione di Docker Compose utilizzato per definire e gestire i container Docker
+networks: # Definisce le reti Docker che saranno utilizzate dai servizi.
+  my_network: # rete utilizzata per connettere i container dei servizi.
 
-networks:
-  my_network:
-
-services:
+services: #i diversi servizi/containe
   mysql:
     container_name: mysql
+    # Specifica l'immagine di MySQL da utilizzare
     image: mysql:latest
+    # Configura variabili d'ambiente per il container. password porta 
     environment:
       MYSQL_ROOT_PASSWORD: Root
+      # internal_port:external_port
     ports:
       - 3306:3306
+      # a quale rete il container deve essere connesso.
     networks:
       - my_network
 
   zipkin:
     container_name: zipkin
+    # Specifica l'immagine di Zipkin da utilizzare
     image: openzipkin/zipkin
     ports:
       - 9411:9411
     networks:
       - my_network
-
+# Questa è la definizione del servizio Docker 
   config-server:
+  # Imposta il nome del container
     container_name: config-server
+    # Specifica come costruire l'immagine del container
     build:
+    # Indica la directory in cui si trova il contesto di compilazione
       context: ./config-server
+      #  Specifica il nome del file Dockerfile da utilizzare per la compilazione dell'immagine.
       dockerfile: Dockerfile
+      # attendere prima di avviare questo servizio
     depends_on:
       - mysql
+      # internal_port:external_port
     ports:
       - 8888:8888
     networks:
       - my_network
+      # se fallisce riavvia
     restart: on-failure
 
   registry:
@@ -61,10 +73,12 @@ services:
       - 9999:9999
     networks:
       - my_network
+      # links  uguale a depends on
     links:
       - config-server
       - registry
       - zipkin
+      # se fallisce riparte 
     restart: on-failure
 
   catalog:

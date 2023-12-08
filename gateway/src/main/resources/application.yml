@@ -1,21 +1,38 @@
+# applicazione gateway basata su Spring Cloud Gateway.
 server:
+# porta del GW
   port: 9999
-
+# cerca il servizio Eureka presso l'URL defZone
 eureka:
   client:
     serviceUrl:
       defaultZone: http://registry:8761/eureka/
 
+# -----------
+# il gateway funge da punto di ingresso per le richieste dell'applicazione e instrada le richieste 
+# a servizi specifici basati su determinati percorsi. Il servizio di destinazione "CATALOG" 
+# sarà registrato su Eureka, e il gateway utilizzerà Eureka per scoprire e instradare le richieste al servizio appropriato.
+# 
+# Ogni route definisce come instradare le richieste per un percorso specifico a un servizio di destinazione
+# ----------
+
+
 spring:
   application:
     name: gateway
+    # Configura le route del gateway Spring Cloud.
   cloud:
     gateway:
       routes:
+        # La route con ID "catalog" instrada le richieste che corrispondono 
+        # al percorso "/catalog/**" al servizio "CATALOG" registrato su Eureka.
         - id: catalog
+             # lb = indica l'utilizzo del bilanciamento del carico. l'URI di destinazione a cui questa route inoltrerà le richieste.
           uri: lb://CATALOG
           predicates:
+          # applicata solo alle richieste che iniziano con /catalog
             - Path=/catalog/**
+          # rimuove il prefisso "/catalog" dalla richiesta  (/catalog/products = /products)
           filters:
             - StripPrefix=1
 

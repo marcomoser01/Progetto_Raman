@@ -1,7 +1,9 @@
+# Specifica il percorso del file di configurazione da importare
 spring:
   config:
     import: http://config-server:8888/db-mysql-docker.yml
-
+    
+# Configura il client Eureka all'interno dell'applicazione.
 eureka:
   client:
     serviceUrl:

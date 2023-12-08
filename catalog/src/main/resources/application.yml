@@ -1,7 +1,9 @@
+#  Indica che l'applicazione deve importare la configurazione dal server di configurazione specificato
 spring:
   config:
     import: http://config-server:8888/db-mysql-docker.yml
-
+# tilizzata per configurare il client Eureka 
+# EUREKA consente alle applicazioni di trovare e comunicare con altri servizi all'interno del sistema
 eureka:
   client:
     serviceUrl:

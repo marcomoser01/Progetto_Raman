@@ -1,8 +1,10 @@
 package com.fbk.rating.domain;
 
 public class RatingRequest {
+    //due attributi voto e messaggio 
     private Integer vote;
     private String message;
+    //metodi getter e setter (per accedere e modificare i campi (variabili) di una classe)
     public Integer getVote() {
         return vote;
     }

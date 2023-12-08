@@ -7,8 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.GeneratedValue;
 
+//una classe che è mappata a una tabella nel database relazionale.
 @Entity
+// generano automaticamente un costruttore con tutti i parametri
 @AllArgsConstructor
+//e un costruttore senza argomenti 
 @NoArgsConstructor
 // @EnableAutoConfiguration
 @Table(name = "Product")

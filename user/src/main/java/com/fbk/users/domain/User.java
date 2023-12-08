@@ -8,20 +8,25 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.GeneratedValue;
 
+//mappata a una tabella nel database.
 @Entity
+// Genera automaticamente un costruttore con parametri che accetta tutti i campi della classe come argomenti.
 @AllArgsConstructor
+// Genera automaticamente un costruttore senza argomenti.
 @NoArgsConstructor
-@Table(name = "Users")
+
+@Table(name = "Users")//nome tabella
 public class User {
-    @Id
-    @GeneratedValue
+    @Id//PK
+    @GeneratedValue//genera automaticamente il valore
     private Integer id;
 
-    @NotNull
+    @NotNull//no nullo
     private String name;
     @NotNull
     private String cognome;
 
+    //setter e getter 
     public Integer getId() {
         return id;
     }

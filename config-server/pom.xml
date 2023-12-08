@@ -18,16 +18,17 @@
 	</properties>
 
 	<dependencies>
-
+<!-- aggiunge funzionalità di monitoraggio e gestione dell'applicazione tramite attuatori -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
+<!-- fornisce le librerie necessarie per creare un server di configurazione utilizzando Spring Cloud Config Server -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-server</artifactId>
 		</dependency>
+		<!-- è un starter che fornisce una configurazione di base per sviluppare applicazioni web Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>

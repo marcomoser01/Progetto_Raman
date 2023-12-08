@@ -1,10 +1,10 @@
 package com.fbk.purchase.domain;
-
+// rappresenta una richiesta di acquisto
 public class PurchaseRequest {
-
+	// identificativo prodotto e quantita
 	private String productId;
 	private Integer count;
-
+	// metodi getter e setter per accedere e modificare i valori degli attributi.
 	public String getProductId() {
 		return productId;
 	}

@@ -7,19 +7,23 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.GeneratedValue;
 
+//una classe che è mappata a una tabella nel database relazionale.
 @Entity
+// generano automaticamente un costruttore con tutti i parametri
 @AllArgsConstructor
+//e un costruttore senza argomenti 
 @NoArgsConstructor
-@Table(name = "Rating")
+@Table(name = "Rating")//nome tabella 
 public class Rating {
-    @Id
-    @GeneratedValue
+    @Id//PK
+    @GeneratedValue//valore generato 
     private Integer id;
     private Integer vote;
     private String message;
     private Integer userId;
     private Integer productId;
 
+    //metodi getter e setter (per accedere e modificare i campi (variabili) di una classe)
     public Integer getId() {
         return id;
     }
