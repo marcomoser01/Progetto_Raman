@@ -1,55 +1,51 @@
-# Steps to start environment
+# Progetto E-commerce con Spring Boot, Zipkin e MySQL
 
-1. (installare maven)
-2. run
+Questo progetto rappresenta un'applicazione  che emula le funzionalità di un negozio online. <br>Sviluppata mediante l'impiego combinato delle tecnologie Spring Boot, Zipkin e MySQL.
 
-```shell
+Diviso in vari micro-servizzi, ciascuno di essi è accuratamente documentato tramite un README specifico, offrendo così una visione dettagliata delle funzionalità, delle istruzioni e dei dettagli di implementazione di ogni componente. Questa struttura modulare consente agli sviluppatori di comprendere e approfondire in modo specifico le diverse parti del progetto, facilitando la comprensione dell'intero ecosistema e delle sue singole componenti.
+
+## Prerequisiti
+
+Prima di eseguire il progetto, assicurati di avere installati i seguenti software:
+- JDK (Java Development Kit)
+- Maven
+- Docker
+
+## Compilazione dei Progetti
+
+Per compilare i vari progetti, è possibile utilizzare uno script fornito. Se hai Node.js installato, esegui il seguente comando per avviare lo script Maven:
+
+```bash
 node mavenScript.mjs
 ```
 
-it's `.mjs`, not `js`
+## Avvio del Progetto
 
-1. (<strong>Alternativamente</strong>)
-
-```python
-python3 mvn-package.py
-```
-
-1. Entra in modalità root con `sudo su`
-2. `docker image ls` per vedere che non ci siano immagini
-    1. se ci sono fai `docker image prune -af`
-3. `docker ps -a` per assicurarsi che non ci siano containers attivi
-4. eseguire il comando `docker compose up -d`
-
-## Altri comandi utili
-
-Per tirare giu i container => `docker compose down`
-
-fai ripartire solo un container
+Dopo aver compilato i progetti, esegui il seguente comando per avviare i container Docker:
 
 ```bash
-docker compose up -d --no-deps containerName
+docker compose up -d
 ```
 
-Elimina TUTTE le immagini dopo che si sono stoppati i container con
 
-```bash
-docker image prune -a
-```
+L'operazione potrebbe richiedere alcuni minuti per assicurare il corretto funzionamento di tutti i servizi.
 
-Per uscire dalla modalità root
+## Docker Images
 
-```bash
-exit
-```
+Le immagini Docker per Zipkin e MySQL vengono scaricate da Docker Cloud.
 
-### Non funziona qualcosa?
+## Collegamenti ai microservizzi
 
-runna `mvn clean package` nella cartella di un modulo (che sia catalog, rating, gateway, etc)
-senza i permessi root.
 
-Ricontrolla di aver eliminato tutte le docker images
+- [Config-Server](./Back-End/config-server/README.md)
+- [Registry](./Back-End/registry/README.md)
+- [Gateway](./Back-End/gateway/README.md)
+- [Catalog](./Back-End/catalog/README.md)
+- [User](./Back-End/user/README.md)
+- [Rating](./Back-End/rating/README.md)
+- [Purchase](./Back-End/purchase/README.md)
 
-## Frontend
+## Swagger
 
-Apri la cartella 'frontend' -> [FRONTEND-README.md](./frontend/FRONTEND-README.md)
+Ogni REST API Service ha la sua pagina Swagger. Per i dettagli e l'utilizzo delle API, consulta la documentazione nei rispettivi README.
+
