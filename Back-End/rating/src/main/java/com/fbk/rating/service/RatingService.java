@@ -33,7 +33,7 @@ public class RatingService {
         return repo.findByProductId(Integer.parseInt(id));
     }
 
-    public List<ProductAndAvg> getPopular() {
+    public List<ProductAndAvg> getPopular() { 
         List<Product> products = productService.getAllProducts();
         List<ProductAndAvg> productAndAvgs = new ArrayList<>();
         for (Product product : products) {
@@ -47,7 +47,7 @@ public class RatingService {
         return ProductAndAvg.sortList(productAndAvgs);
     }
 
-    public Rating saveProduct(RatingRequest ratingReq, String productId, String userId) {
+    public Rating saveRating(RatingRequest ratingReq, String productId, String userId) {
         User user = userService.getUser(userId);
         Product product = productService.getProduct(productId);
         if (user != null && product != null) {

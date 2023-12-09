@@ -1,8 +1,10 @@
 package com.fbk.rating.domain;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.GeneratedValue;
@@ -10,15 +12,16 @@ import jakarta.persistence.GeneratedValue;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-// @EnableAutoConfiguration
-@Table(name = "Product")
+@Table(name = "Products")
 public class Product {
     @Id
     @GeneratedValue
     private Integer id;
+    @NotNull
     private String title;
     private String category;
     private String description;
+    @NotNull
     private Double price;
     private Integer quantity;
     

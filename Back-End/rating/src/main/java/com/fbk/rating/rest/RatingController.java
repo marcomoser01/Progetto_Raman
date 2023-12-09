@@ -40,7 +40,7 @@ public class RatingController {
     @PostMapping("/ratings/{productId}/{userId}")
     public Rating addRating(@RequestBody RatingRequest rating, @PathVariable String productId,
             @PathVariable String userId) {
-        return service.saveProduct(rating, productId, userId);
+        return service.saveRating(rating, productId, userId);
     }
 
     @GetMapping("/ratings/{productId}")

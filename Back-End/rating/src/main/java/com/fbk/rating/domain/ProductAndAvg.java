@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+
 public class ProductAndAvg {
     private Product product;
     private Double avgVote;
@@ -23,6 +24,8 @@ public class ProductAndAvg {
     public void setAvgVote(Double avgVote) {
         this.avgVote = avgVote;
     }
+
+    public ProductAndAvg() {}
 
     public ProductAndAvg(Product product, Double avgVote) {
         this.product = product;

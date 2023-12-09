@@ -1,5 +1,10 @@
 package com.fbk.rating.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class RatingRequest {
     private Integer vote;
     private String message;
