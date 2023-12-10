@@ -1,8 +1,9 @@
 package com.fbk.purchase.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fbk.purchase.domain.Product;
@@ -19,8 +20,8 @@ public class PurchaseService {
 	@Autowired
 	private ProductService productService;
 	
-	public Page<Purchase> getUserPurchases(String userId, Pageable page) {
-		return repo.findByUserId(userId, page);
+	public Optional<List<Purchase>> getUserPurchases(String userId) {
+		return repo.findByUserId(userId);
 	}
 	
 	public Purchase getUserPurchase(String purchaseId) {

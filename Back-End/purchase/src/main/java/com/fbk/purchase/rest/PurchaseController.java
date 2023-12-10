@@ -1,9 +1,10 @@
 package com.fbk.purchase.rest;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import com.fbk.purchase.domain.Purchase;
@@ -32,8 +33,8 @@ public class PurchaseController {
     }
 
 	@GetMapping("/purchases/{userId}")
-	public @ResponseBody Page<Purchase> listPurchases(@PathVariable String userId, Pageable page) {
-		return service.getUserPurchases(userId, page);
+	public @ResponseBody Optional<List<Purchase>> listPurchases(@PathVariable String userId) {
+		return service.getUserPurchases(userId);
 	}
 
 	@GetMapping("/purchases/purchase/{purchaseId}")

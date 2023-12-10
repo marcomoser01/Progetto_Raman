@@ -77,8 +77,8 @@ make_curl_request_without_content_type "purchase/info_response.json" "GET" "http
 # Chiamata "purchases/purchase/{purchaseId}" per l'entità "Purchase"
 make_curl_request_without_content_type "purchase/purchase_id_1_response.json" "GET" "http://localhost:9999/purchase/api/purchases/purchase/1"
 
-# # Chiamata "purchases/{userId}" per l'entità "Purchase"
-# make_curl_request_without_content_type "purchase/purchases_userId_get_response.json" "GET" "http://localhost:9999/purchase/api/purchases/1"
+# Chiamata "purchases/{userId}" per l'entità "Purchase"
+make_curl_request_without_content_type "purchase/purchases_userId_get_response.json" "GET" "http://localhost:9999/purchase/api/purchases/1"
 
 
 #------------------------------ RATING ------------------------------
