@@ -11,17 +11,9 @@ Prima di eseguire il progetto, assicurati di avere installati i seguenti softwar
 - Maven
 - Docker
 
-## Compilazione dei Progetti
-
-Per compilare i vari progetti, è possibile utilizzare uno script fornito. Se hai Node.js installato, esegui il seguente comando per avviare lo script Maven:
-
-```bash
-node mavenScript.mjs
-```
-
 ## Avvio del Progetto
 
-Dopo aver compilato i progetti, esegui il seguente comando per avviare i container Docker:
+Esegui il seguente comando i progetti verranno compilati e lanciati tramite l'utilizzo di container:
 
 ```bash
 docker compose up -d
