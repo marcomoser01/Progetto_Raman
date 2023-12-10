@@ -37,13 +37,13 @@ public class PurchaseServiceTest {
         String userId = "1";
         Pageable pageable = Pageable.unpaged();
         Page<Purchase> mockedPage = mock(Page.class);
-        when(purchaseRepositoryMock.findByUserId(Integer.parseInt(userId), pageable)).thenReturn(mockedPage);
+        when(purchaseRepositoryMock.findByUserId(userId, pageable)).thenReturn(mockedPage);
 
         Page<Purchase> userPurchases = purchaseService.getUserPurchases(userId, pageable);
 
         assertThat(userPurchases).isNotNull();
         assertThat(userPurchases).isEqualTo(mockedPage);
-        verify(purchaseRepositoryMock, times(1)).findByUserId(Integer.parseInt(userId), pageable);
+        verify(purchaseRepositoryMock, times(1)).findByUserId(userId, pageable);
     }
 
     @Test

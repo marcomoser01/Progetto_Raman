@@ -1,0 +1,504 @@
+{
+	"info": {
+		"_postman_id": "a22b8ccf-b602-4e51-a717-3417bf65d62b",
+		"name": "Progetto Raman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21130290"
+	},
+	"item": [
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseCatalog}}/info",
+							"host": [
+								"{{baseCatalog}}"
+							],
+							"path": [
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseCatalog}}/products",
+							"host": [
+								"{{baseCatalog}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseCatalog}}/product/2",
+							"host": [
+								"{{baseCatalog}}"
+							],
+							"path": [
+								"product",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "products/category/{category}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseCatalog}}/products/category/1",
+							"host": [
+								"{{baseCatalog}}"
+							],
+							"path": [
+								"products",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Borraccia\",\n    \"category\": \"Alimentare\",\n    \"description\": \"La borraccia è gialla\",\n    \"price\": 20,\n    \"quantity\": 30\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseCatalog}}/addProduct",
+							"host": [
+								"{{baseCatalog}}"
+							],
+							"path": [
+								"addProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addProducts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"title\": \"Cubo di Rubik 3x3x3\",\n        \"category\": \"Divertimento\",\n        \"description\": \"Il cubo è adatto per gli speedcuber\",\n        \"price\": 25,\n        \"quantity\": 20\n    },\n    {\n        \"title\": \"Cubo di Rubik 4x4x4\",\n        \"category\": \"Divertimento\",\n        \"description\": \"Il cubo è adatto per gli speedcuber\",\n        \"price\": 35,\n        \"quantity\": 10\n    },\n    {\n        \"title\": \"Cubo di Rubik 5x5x5\",\n        \"category\": \"Divertimento\",\n        \"description\": \"Il cubo è adatto per gli speedcuber\",\n        \"price\": 30,\n        \"quantity\": 40\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseCatalog}}/addProducts",
+							"host": [
+								"{{baseCatalog}}"
+							],
+							"path": [
+								"addProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "products/{id}/availability/{amount}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseCatalog}}/products/2/availability/-15",
+							"host": [
+								"{{baseCatalog}}"
+							],
+							"path": [
+								"products",
+								"2",
+								"availability",
+								"-15"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Lista delle api di catalog"
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUser}}/info",
+							"host": [
+								"{{baseUser}}"
+							],
+							"path": [
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUser}}/user/1",
+							"host": [
+								"{{baseUser}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUser}}/users",
+							"host": [
+								"{{baseUser}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Lorenzo\",\n  \"cognome\": \"Sannicolò\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUser}}/addUser",
+							"host": [
+								"{{baseUser}}"
+							],
+							"path": [
+								"addUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUsers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"name\": \"Francesco\",\n    \"cognome\": \"Santini\"\n  },\n  {\n    \"name\": \"Bledi\",\n    \"cognome\": \"Hamzaj\"\n  }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUser}}/addUsers",
+							"host": [
+								"{{baseUser}}"
+							],
+							"path": [
+								"addUsers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Purchase",
+			"item": [
+				{
+					"name": "info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{basePurchase}}/info",
+							"host": [
+								"{{basePurchase}}"
+							],
+							"path": [
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "purchases/purchase/{purchaseId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{basePurchase}}/purchases/purchase/1",
+							"host": [
+								"{{basePurchase}}"
+							],
+							"path": [
+								"purchases",
+								"purchase",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "purchases/{userId}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\": \"1\",\n    \"count\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{basePurchase}}/purchases/1",
+							"host": [
+								"{{basePurchase}}"
+							],
+							"path": [
+								"purchases",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "purchases/{userId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{basePurchase}}/purchases/1",
+							"host": [
+								"{{basePurchase}}"
+							],
+							"path": [
+								"purchases",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rating",
+			"item": [
+				{
+					"name": "info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseRating}}/info",
+							"host": [
+								"{{baseRating}}"
+							],
+							"path": [
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "popular",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseRating}}/popular",
+							"host": [
+								"{{baseRating}}"
+							],
+							"path": [
+								"popular"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rating/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseRating}}/rating/1",
+							"host": [
+								"{{baseRating}}"
+							],
+							"path": [
+								"rating",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ratings/{productId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseRating}}/ratings/1",
+							"host": [
+								"{{baseRating}}"
+							],
+							"path": [
+								"ratings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ratings/{productId}/{userId}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vote\": 4,\n    \"message\": \"Mi è piaciuto\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseRating}}/ratings/1/1",
+							"host": [
+								"{{baseRating}}"
+							],
+							"path": [
+								"ratings",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:9999",
+			"type": "string"
+		},
+		{
+			"key": "baseCatalog",
+			"value": "{{baseUrl}}/catalog/api",
+			"type": "string"
+		},
+		{
+			"key": "basePurchase",
+			"value": "{{baseUrl}}/purchase/api",
+			"type": "string"
+		},
+		{
+			"key": "baseUser",
+			"value": "{{baseUrl}}/user/api",
+			"type": "string"
+		},
+		{
+			"key": "baseRating",
+			"value": "{{baseUrl}}/rating/api",
+			"type": "string"
+		}
+	]
+}

@@ -19,8 +19,8 @@ public class PurchaseService {
 	@Autowired
 	private ProductService productService;
 	
-	public Page<Purchase> getUserPurchases(String userId, Pageable pageRequest) {
-		return repo.findByUserId(Integer.parseInt(userId), pageRequest);
+	public Page<Purchase> getUserPurchases(String userId, Pageable page) {
+		return repo.findByUserId(userId, page);
 	}
 	
 	public Purchase getUserPurchase(String purchaseId) {

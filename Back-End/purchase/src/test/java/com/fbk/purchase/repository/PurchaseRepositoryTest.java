@@ -29,7 +29,7 @@ public class PurchaseRepositoryTest {
     @Test
     public void testFindByUserId() {
         // Mocking data
-        int userId = 1;
+        String userId = "1";
         List<Purchase> purchases = new ArrayList<>();
         purchases.add(new Purchase(1, "productId1", "Product Title 1", "Category", "User1", 20.0, 2));
         purchases.add(new Purchase(2, "productId2", "Product Title 2", "Category", "User1", 30.0, 1));
@@ -40,7 +40,7 @@ public class PurchaseRepositoryTest {
         when(purchaseRepository.findByUserId(userId, Pageable.unpaged())).thenReturn(purchasePage);
 
         // Call service method
-        Page<Purchase> result = purchaseService.getUserPurchases(String.valueOf(userId), Pageable.unpaged());
+        Page<Purchase> result = purchaseService.getUserPurchases(userId, Pageable.unpaged());
 
         // Assert
         assertEquals(2, result.getTotalElements());

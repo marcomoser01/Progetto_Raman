@@ -10,7 +10,8 @@ import com.fbk.purchase.domain.Purchase;
 import com.fbk.purchase.domain.PurchaseRequest;
 import com.fbk.purchase.service.PurchaseService;
 
-@RestController
+
+@RestController()
 @RequestMapping("/api")
 @CrossOrigin
 public class PurchaseController {
@@ -31,8 +32,8 @@ public class PurchaseController {
     }
 
 	@GetMapping("/purchases/{userId}")
-	public @ResponseBody Page<Purchase> listPurchases(@PathVariable String userId, Pageable pageRequest) {
-		return service.getUserPurchases(userId, pageRequest);
+	public @ResponseBody Page<Purchase> listPurchases(@PathVariable String userId, Pageable page) {
+		return service.getUserPurchases(userId, page);
 	}
 
 	@GetMapping("/purchases/purchase/{purchaseId}")
