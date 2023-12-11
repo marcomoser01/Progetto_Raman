@@ -49,11 +49,11 @@ all the package.json scripts can also be run with `npm run x`
     - create func in fetch.ts
     - update UI accordingly (location.assign)
 
-- [ ] add average vote
+- [x] add average vote
 
 **_dopo che la consegna di raman è stata completata:_**
 
-- [ ] call _addProduct_ api -> create func in fetch.ts
+- [x] call _addProduct_ api -> create func in fetch.ts
   - update UI accordingly (lcoation.assign)
-- [ ] prendi nome utente da mettere in \<Rating\>
-- [ ] le stelline al posto di 5/5, 3/5, etc.
+- [x] prendi nome utente da mettere in \<Rating\>
+- [x] le stelline al posto di 5/5, 3/5, etc.
